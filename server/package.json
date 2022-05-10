@@ -1,0 +1,20 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Personal document management",
+  "main": "index.js",
+  "scripts": {
+    "test": "no specific test"
+  },
+  "keywords": [
+    "node"
+  ],
+  "author": "Lakshmana pandian",
+  "license": "ISC",
+  "devDependencies": {
+    "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "nodemon": "^2.0.16"
+  }
+}

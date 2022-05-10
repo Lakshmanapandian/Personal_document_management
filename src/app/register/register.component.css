@@ -1,0 +1,21 @@
+.card,
+.card-1 {
+  /* background: hsl(205, 46%, 30%, 1); */
+  border: none;
+  width: 450px;
+  margin-bottom: 1.5rem;
+  margin-top: 20px;
+}
+.form-group,
+.btn {
+  margin-top: 1rem;
+}
+.card h1 {
+  color: black;
+}
+label {
+  color: black;
+}
+button{
+    margin-left: 15px;
+}
