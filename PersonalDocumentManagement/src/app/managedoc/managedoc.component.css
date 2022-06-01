@@ -1,0 +1,43 @@
+.card{
+    position: absolute;
+    top: 6%;
+    left: 29%;
+    width: 68%;
+    height: 90%;
+}
+button{
+    margin-left: 10px;
+}
+a{
+    text-decoration: none;
+    color:white;
+}
+a:hover{
+    color: rgb(114, 114, 216);
+    text-decoration: underline;
+}
+.ul1{
+    /* position:relative; */
+    position: static;
+    background-color: rgb(39, 42, 47) ; 
+    width: 25vw;
+    height: 110vh;
+ }
+ li{
+ display: flex;
+ padding: 40px;
+ color: white;
+ }
+ .rename{
+    position: absolute;
+    margin-top: -38%;
+    width: 20vw;
+    height: 30vh;
+    background-color: white;
+    margin-left: 55%;
+    border: 1px solid black;
+}
+
+
+
+ 

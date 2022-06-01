@@ -1,40 +1,65 @@
-<div class="container">
-    <div class="card mx-auto">
+<div class="container mt-5" *ngIf="value">
+    <div class="card  mx-auto">
         <div class="card-header text-center">
-            <h1>Sign Up Form</h1>
+            <h1 class="text-dark">Sign Up</h1>
         </div>
         <div class="card-body">
-            <form>
+            <form [formGroup]="signup" (ngSubmit)="storeform(this.signup.value)">
                 <div class="form-group">
-                    <label for="username">Username :</label>
-                    <input type="text" name="username" class="form-control" placeholder="Enter Username">
+                    <label for="username" class="text-dark">Username :</label>
+                    <input type="text" formControlName="username" class="form-control" placeholder="Enter Username"
+                        autofocus="autofocus" autofocus="autofocus">
+                    <span class="text-danger"
+                        *ngIf="signup.controls['username'].touched && signup.hasError('required','username')">
+                        *Username is required</span>
                 </div>
                 <div class="form-group">
-                    <label for="first_Name">First Name :</label>
-                    <input type="text" name="first_Name" class="form-control" placeholder="Enter First Name">
+                    <label for="first_Name" class="text-dark">First Name :</label>
+                    <input type="text" formControlName="first_name" class="form-control" placeholder="Enter First Name">
+                    <span class="text-danger"
+                        *ngIf="signup.controls['first_name'].touched && signup.hasError('required','first_name')">*First
+                        Name is required </span>
                 </div>
                 <div class="form-group">
-                    <label for="last_Name">Last Name :</label>
-                    <input type="text" name="last_Name" class="form-control" placeholder="Enter Last Name">
+                    <label for="last_Name" class="text-dark">Last Name :</label>
+                    <input type="text" formControlName="last_name" class="form-control" placeholder="Enter Last Name">
+                    <span class="text-danger"
+                        *ngIf="signup.controls['last_name'].touched && signup.hasError('required','last_name')">*Last
+                        Name is required </span>
                 </div>
                 <div class="form-group">
-                    <label for="email">Email :</label>
-                    <input type="email" name="email" class="form-control" placeholder="Enter Your Email ">
+                    <label for="email" class="text-dark">Email :</label>
+                    <input type="email" formControlName="email" class="form-control" placeholder="Enter Your Email ">
+                    <span class="text-danger"
+                        *ngIf="signup.controls['email'].touched && signup.hasError('required','email')">*Email is
+                        required </span>
                 </div>
                 <div class="form-group">
-                    <label for="password">Password :</label>
-                    <input type="password" name="password" class="form-control" placeholder="Enter Your Password">
+                    <label for="password" class="text-dark">Password :</label>
+                    <input type="password" formControlName="password" class="form-control"
+                        placeholder="Enter Your Password">
+                    <span class="text-danger"
+                        *ngIf="signup.controls['password'].dirty && signup.hasError('required','password')">*Password
+                        is
+                        required </span>
                 </div>
                 <div class="form-group">
-                    <label for="confirm_password">Confirm Password :</label>
-                    <input type="password" name="confirm_password" class="form-control" placeholder="Confirm Password">
+                    <label for="confirm_password" class="text-dark">Confirm Password :</label>
+                    <input type="password" formControlName="confirm_password" class="form-control"
+                        placeholder="Confirm Password">
+                    <span class="text-danger"
+                        *ngIf="signup.controls['confirm_password'].dirty && signup.hasError('required','confirm_password')">*Confirm
+                        is
+                        required </span>
                 </div>
-                <div class="text-center">
-                    <button type="button" class="btn btn-danger">Register </button>
-                    <button type="button" class="btn btn-danger">Cancel</button>
+                <div class="button text-center">
+                    <button type="submit" class="btn btn-outline-dark px-4 py-2">Register</button>
+                    <button type="submit" class="btn btn-outline-dark px-3 py-2">cancel</button>
 
+                    <p class="mt-3">Already Have account?<a routerLink='/login' class="text-danger">Login</a> </p>
                 </div>
             </form>
         </div>
     </div>
 </div>
+<p style="color: green; font-weight:bolder ;font-size:30px; margin-left:30rem">{{sucess}}</p>

@@ -1,0 +1,95 @@
+<link rel="stylesheet"
+    href="https://fonts.sandbox.google.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<ul class="ul1">
+    <li> <span class="material-symbols-outlined">
+            home
+        </span> DashBoard</li>
+    <li><span class="material-symbols-outlined">
+            description
+        </span>Document </li>
+
+    <li><a routerLink="/adddocument"> Add Document</a></li>
+    <li><a routerLink="/managedoc"> Manage Document</a></li>
+    <li> <a href=""> Sharex</a></li>
+    <li><span class="material-symbols-outlined">
+            logout
+        </span><a routerLink=""> Logout</a></li>
+</ul>
+<router-outlet></router-outlet>
+<div class="card mx-auto" style="height: 90vh;
+width: 90w; margin-top:10px; background-color: rgb(201, 195, 195);">
+    <!-- <div *ngFor="let obj of files" style="display:inline-flex">
+        <div scope="row" (click)="download(obj.filepath,obj.file_name)" style="cursor: pointer;">
+            <img src="../../images/file.webp" alt="" style="width:10vw;"> <br>{{obj.file_name}}
+
+        </div>
+    </div> -->
+
+    <table class="table bg-light" style="height:10vh">
+        <thead class="text-dark">
+            <tr>
+                <th scope="col">filename</th>
+                <th scope="col">type</th>
+                <th scope="col">Operation</th>
+
+
+            </tr>
+        </thead>
+        <tbody class="text-dark" *ngFor="let obj of files">
+            <tr>
+                <td scope="row" style="cursor: pointer;height:2vw;;">
+                    <img src="../../images/file.webp" alt="" style="width:6vw;"> <br>
+                    {{obj.file_name}}
+
+                </td>
+                <td scope="row"> {{obj.file_type}}</td>
+                <td scope="row"><button class="btn btn-outline-dark px-4 py-2"
+                        (click)="download(obj.filepath,obj.file_name)" style="align-items: center;">Download</button>
+                </td>
+                <td scope="row"><button class="btn btn-outline-dark px-4 py-2" (click)="delete(obj._id,obj._rev)"
+                        (click)="localdelete(obj.filepath,obj.file_name)">Delete</button></td>
+                <td scope="row"><button class="btn btn-outline-dark px-4 py-2" (click)="this.renamediv = true "
+                        (click)="this.renamediv= true" (click)="oldpath(obj)">Rename</button>
+                </td>
+                <!-- <td>
+                    <form [formGroup]="rename" (ngSubmit)="renameLocal(this.rename.value,obj.filepath,obj.file_name)">
+                        <input type="text" class="form-control" placeholder="Rename File" formControlName="files"
+                            id="document">
+                        <button class="btn btn-outline-dark px-4 py-2" style="margin-top:10px"
+                            (click)=renameLocal(this.rename.values,obj.filepath,obj.file_name)
+                            type="submit">Rename</button>
+                    </form>
+                </td> -->
+                <!-- <div *ngFor="let obj of files">
+                <i class="{{getFileExtension(obj.file_name)}}" style="color:#5cb85c;" aria-hidden="true"></i>
+                {{obj.file}}
+            </div> -->
+                <!-- image.png
+                <i class="{{getFileExtension(obj.file_name)}}" style="color:#5cb85c;" aria-hidden="true"></i>
+                {{obj.file_name}} -->
+
+
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="rename" *ngIf="renamediv">
+    <form [formGroup]="rename" style="height:3vh;" (ngSubmit)="renameLocal(this.rename.value)">
+        <span class="material-symbols-outlined">
+            Rename
+        </span>
+        <span class="material-symbols-outlined" style="margin-left: 100px;" (click)="this.renamediv=false">
+            close
+        </span>
+        <div class="form-group">
+            <label for="file" style=" margin-left: 10px">File rename :</label>
+            <input type="text" class="form-control" placeholder="Enter name" formControlName="files" id="document"
+                style="width:10rem;margin-left: 10px;">
+        </div>
+        <div style="margin-top: 20px;">
+            <button type="submit" class="btn btn-outline-dark" (click)="renameDatabase(this.rename.value)">Rename
+            </button>
+            <button type="submit" class="btn btn-outline-dark" (click)="this.renamediv = false">Cancel</button>
+        </div>
+    </form>
+</div>

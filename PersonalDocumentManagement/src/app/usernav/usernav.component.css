@@ -1,0 +1,13 @@
+.ul1{
+   background-color: rgb(39, 42, 47) ; 
+   width: 25vw;
+   height: 100vh;
+}
+li{
+display: flex;
+padding: 40px;
+color: white;
+}
+/* .ul2{
+    display: none;
+} */

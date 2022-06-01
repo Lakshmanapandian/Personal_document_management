@@ -1,27 +1,39 @@
+<div class="nav">
+    <ul>
+        <img src="../../images/logo.png" alt="">
+        <li> <a class="nav-link" href="/home">Home</a></li>
+        <li> <a class="nav-link" routerLink="/admin">Admin Login</a></li>
+        <li><a class="nav-link" routerLink="/login" href="#"> User Login</a></li>
+    </ul>
+</div>
 <div class="container">
     <div class="card mx-auto">
         <div class="card-header text-center">
-            <h1>Sign in Form</h1>
+            <h1> User Login</h1>
         </div>
         <div class="card-body">
-            <form>
+            <form [formGroup]="userForm">
                 <div class="form-group">
-                    <label for="username">Username :</label>
-                    <input type="text" name="username" class="form-control" placeholder="Enter Username">
+                    <label for="username">User Name:</label>
+                    <input type="text" name="username" class="form-control" placeholder="Enter Username"
+                        formControlName="username">
                 </div>
-
                 <div class="form-group">
                     <label for="password">Password :</label>
-                    <input type="password" name="password" class="form-control" placeholder="Enter Your Password">
+                    <input type="password" name="password" class="form-control" placeholder="Enter Your Password"
+                        formControlName="password">
                 </div>
                 <div>
-                    <button type="button" class="btn btn-danger">login </button>
-                    <button type="button" class="btn btn-danger">Cancel</button>
+                    <button type="button" class="btn btn-outline-dark" (click)="userFormData(this.userForm.value)">
+                        Login</button>
+                    <button type="button" class="btn btn-outline-dark" (click)=this.userForm.reset()>Cancel</button>
                 </div>
-                <div class="signup"> <a routerLink="/register"> Signup </a>
+                <div class="signup"> <a routerLink="/register" style="color: red;"> Signup </a>
                 </div>
             </form>
         </div>
     </div>
 
 </div>
+<p>{{notify}}</p>
+<!-- <app-managedoc [username]="this.userForm.username" ></app-managedoc> -->

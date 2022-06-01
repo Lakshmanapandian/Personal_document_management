@@ -1,0 +1,23 @@
+p{
+    color: white;
+}img{
+    width: 6vw;
+    height: 10vh;
+}
+a{
+    color: white;
+}
+ul{
+    background-color: rgb(32,37,41);
+    width: 100%;
+    align-items: center;
+    padding-bottom: 20px;
+
+   
+}
+li{
+    display: inline-block;
+    color: white;
+    margin-top: 20px;
+
+    }

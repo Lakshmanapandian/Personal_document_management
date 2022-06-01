@@ -1,9 +1,16 @@
+p{
+    font-size: 20px;
+    color: green;
+    margin-left: 40pc;
+    margin-top:10px;
+    font-weight: 900;
+}
 .card{
     background-color: white;
     width: 30vw;
     height: 50vh;
     margin: auto;
-  margin-top: 15vw;;
+  margin-top: 10vw;;
 }
 input{
     margin-top: 3vh;
@@ -22,3 +29,25 @@ button{
     margin-top: -8%;
     margin-left: 85%;
 }
+img{
+    width: 6vw;
+    height: 10vh;
+}
+a{
+    color: white;
+}
+ul{
+    background-color: rgb(32,37,41);
+    width: 100%;
+    align-items: center;
+    padding-bottom: 20px;
+
+   
+}
+li{
+    display: inline-block;
+    color: white;
+    margin-top: 20px;
+
+    }
+   
