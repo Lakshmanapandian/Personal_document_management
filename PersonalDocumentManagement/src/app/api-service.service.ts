@@ -44,11 +44,10 @@ export class ApiServiceService {
     console.log(obj);
     return this.http.post('http://localhost:8000/userfiles',obj);
   }
-  uploadFiles(formdata:any,user_id:any,title:any){
+  uploadFiles(formdata:any,user_id:any){
     var obj = {
       userid:user_id,
       formdata:formdata,
-      title:title
     }
     console.log(obj);
     return this.http.post('http://localhost:8000/single',obj);

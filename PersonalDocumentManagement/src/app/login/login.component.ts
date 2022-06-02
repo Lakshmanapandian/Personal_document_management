@@ -31,7 +31,6 @@ files:any=[]
 
       }
     );
-
   }
 userFormData(formvalue:any){
   console.log(formvalue);
@@ -45,7 +44,7 @@ userFormData(formvalue:any){
     }
  }
   if(this.flag == 1 ){
-    this.router.navigate(['/adddocument']);
+    this.router.navigate(['/welcomeadmin']);
   }
   else{
       this.notify = "invalid user";

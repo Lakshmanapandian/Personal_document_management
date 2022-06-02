@@ -18,8 +18,8 @@ import { DatePipe } from '@angular/common';
 import { UserdashboardComponent } from './userdashboard/userdashboard.component';
 import { ManagedocComponent } from './managedoc/managedoc.component';
 import { WelcomeadminComponent } from './welcomeadmin/welcomeadmin.component';
-
-
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,10 +39,16 @@ import { WelcomeadminComponent } from './welcomeadmin/welcomeadmin.component';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ToastrModule.forRoot({
+      closeButton: true,
+      timeOut: 15000, // 15 seconds
+      progressBar: true,
+    }),
   ],
   providers: [DatePipe,NavbarComponent],
   bootstrap: [AppComponent]

@@ -29,8 +29,9 @@
                     </span>
                     <div class="form-group">
                         <label for="file">Upload :</label>
+                        <!-- " -->
                         <input type="file" name="password" class="form-control" placeholder="Upload File"
-                            formControlName="files" id="document" (change)="checkduplicate($event)">
+                            formControlName="files" id="document" (change)="checkduplicate()">
                     </div>
                     <div style="margin-top: 20px;">
                         <button type="submit" class="btn btn-outline-dark">Upload </button>

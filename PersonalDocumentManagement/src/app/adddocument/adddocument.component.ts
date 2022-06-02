@@ -45,6 +45,38 @@ add = false;
 
     console.log(Formvalue);
   }
+  checkduplicate(){
+    let id:any = localStorage.getItem('username');
+    // console.log(JSON.parse(id))
+    let user_id = JSON.parse(id);
+    this.api.getuserfiles(user_id).subscribe((data:any)=>{  
+      this.allfiles = data;
+      this.allfiles =this.allfiles.docs;
+      // console.log(this.allfiles);
+      for(const i of this.allfiles){
+        this.files.push(i);
+         
+    } 
+
+       });  
+
+      //  console.log(this.files)
+    let inputEl: HTMLInputElement =  this.el.nativeElement.querySelector('#document');
+    if(!inputEl || !inputEl.files){
+      console.log('NULL');
+      return ;
+    }
+   let  filename = inputEl.files[0].name;
+  //  console.log(filename);
+   for(const i  of this.files){
+    if(i.file_name ==  filename){
+      alert("File already Uploaded");  
+      this.upload.reset();
+      // this.el.nativeElement.querySelector('#username').focus();
+
+    }
+  }
+}
     submit() {
   console.log(this.user_id);
 
@@ -60,9 +92,8 @@ add = false;
           for (let i = 0; i < fileCount; i++) {
               formData.append('image', inputEl.files[i]);
           }
-            let headers = new Headers();
-            console.log(formData);
-            headers.append('Accept', 'application/json');
+             
+            // headers.append('Accept', 'application/json');
               this.http.post('http://localhost:8000/single', formData).subscribe(
                   data => console.log(data),
                   error => console.log(error)
@@ -70,9 +101,9 @@ add = false;
   
       }
       this.notify = "file upload sucessfully"
-      // setTimeout(function(){
-      //   window.location.reload();
-      // }, 100);
+      setTimeout(function(){
+        window.location.reload();
+      }, 1000);
     }
   addfunction(){
     this.add = !this.add;

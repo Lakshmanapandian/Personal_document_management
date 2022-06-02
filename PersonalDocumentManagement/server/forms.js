@@ -109,7 +109,7 @@ app.delete("/delete_items/:id/:id1", (request, response) => {
 });
 app.get("/getAdminId", (request, response) => {
   // console.log(request);
-  console.log("fetching Admin Details");
+  logger.info("fetching Admin Details");
   var data = {
     selector: {
       type: "admin",
@@ -171,10 +171,11 @@ app.get("/getAdminId", (request, response) => {
 app.post("/username", (request, response) => {
   username = request.body.username;
   if (fs.existsSync(path.join(__dirname, "public/Uploads", username))) {
-    console.log("folder  already exits");
+    // console.log("folder  already exits");
+    logger.info("Folder already exist");
   } else {
     fs.mkdirSync(path.join(__dirname, "public/Uploads", username));
-    console.log(`${username} folder created`);
+    logger.info(`${username} folder created`);
   }
   app.post("/single", (req, res) => {
     var store = multer.diskStorage({
@@ -184,10 +185,10 @@ app.post("/username", (request, response) => {
       },
       filename: function (req, file, cb) {
         originalname = file.originalname;
-        console.log(originalname);
+        // console.log(originalname);
         pathtype = file.mimetype;
         cb(null, originalname, pathtype);
-        console.log(originalname + " uploaded");
+        logger.info(originalname + " uploaded");
         var fileDetails = {
           file_name: originalname,
           file_type: pathtype,
@@ -198,14 +199,14 @@ app.post("/username", (request, response) => {
         uploadcontroller
           .UploadForm(fileDetails)
           .then((res) => {
-            logger.info("Signup form added");
+            logger.info("Uploaded successfully");
             response.send(res);
           })
           .catch((err) => {
             logger.warn("error ");
             response.send(err, "Faild to upload");
           });
-        console.log("Data added");
+        // console.log("Data added");
       },
     });
     var upload = multer({ storage: store }).single("image");
@@ -259,7 +260,7 @@ app.post("/username", (request, response) => {
 // });
 app.post("/userfiles", (request, response) => {
   username = request.body.username;
-  console.log(username);
+  // console.log(username);
   var data = {
     selector: {
       user_id: username,
@@ -285,10 +286,10 @@ app.post("/userfiles", (request, response) => {
 app.post("/download", (request, response) => {
   var path = request.body.filepath;
   downloadFilename = request.body.filename;
-  console.log(path);
-  console.log(downloadFilename);
+  // console.log(path);
+  // console.log(downloadFilename);
   const filess = `${path}\\${downloadFilename}`;
-  console.log(filess);
+  // console.log(filess);
   response.download(filess);
   // const dirpath = path.join(__dirname, `${path}`,${downloadFilename});
   // var filestream = fs.createReadStream(file);
@@ -297,13 +298,13 @@ app.post("/download", (request, response) => {
 app.post("/localdelete", (request, response) => {
   var path = request.body.filepath;
   deleteFilename = request.body.filename;
-  console.log(path);
-  console.log(deleteFilename);
+  // console.log(path);
+  // console.log(deleteFilename);
   const filess = `${path}\\${deleteFilename}`;
-  console.log(filess);
+  // console.log(filess);
   // console.log(filess);
   fs.unlinkSync(filess);
-  console.log(`${deleteFilename} deleted`);
+  logger.info(`${deleteFilename} deleted`);
 });
 app.post("/localrename", (request, response) => {
   var oldpath = request.body.oldfilepath;
@@ -314,10 +315,10 @@ app.post("/localrename", (request, response) => {
   var newpath = request.body.newpath;
   var oldname = oldpath + "\\" + oldfilename;
   var newname = oldpath + "\\" + newpath + "." + ext;
-  console.log(oldname);
-  console.log(newname);
+  // console.log(oldname);
+  // console.log(newname);
   fs.rename(oldname, newname, () => {
-    console.log("file renamed successfully");
+    logger.info("file renamed successfully");
   });
   const newfilename = newpath + "." + ext;
   var newobject = {
@@ -329,7 +330,7 @@ app.post("/localrename", (request, response) => {
     filepath: request.body.oldfilepath,
     type: request.body.type,
   };
-  console.log(newobject);
+  // console.log(newobject);
   renamecontroller
     .renameDocuments(newobject)
     .then((res) => {
