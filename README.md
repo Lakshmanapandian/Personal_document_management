@@ -1,8 +1,4 @@
 # Personal_document_management
-# Title
-
-Personal document management
-
 # Description
 
 Personal document management (PDM):
