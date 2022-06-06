@@ -1,9 +1,10 @@
 const my_db = require("../db");
 const logger = require("../logger/logger");
 
-var getadmin = async (obj) => {
+const getadmin = async (obj) => {
+  let val;
   try {
-    var val = await my_db
+    val = await my_db
       .getalluser(obj, "document_management")
       .then((data) => {
         logger.info("Your get was fetched sucessfully!!!");
@@ -18,9 +19,10 @@ var getadmin = async (obj) => {
   }
   return val;
 };
-var deleteuser = async (id, rev) => {
+const deleteuser = async (id, rev) => {
+  let val;
   try {
-    var val = await my_db
+    val = await my_db
       .deleteuser(id, rev, "document_management")
       .then((data) => {
         logger.info("Your get was fetched sucessfully!!!");

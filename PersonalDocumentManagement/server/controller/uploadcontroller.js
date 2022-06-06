@@ -1,9 +1,10 @@
 const { async } = require("rxjs");
 const my_db = require("../db");
 const logger = require("../logger/logger");
-var UploadForm = async (object) => {
+const UploadForm = async (object) => {
+  let val;
   try {
-    var val = await my_db
+    val = await my_db
       .add(object, "document_management")
       .then((data) => {
         logger.info(`${object.file_name} uploaded successfully;`);
@@ -18,10 +19,10 @@ var UploadForm = async (object) => {
   }
   return val;
 };
-var showDocuments = async (object) => {
-  //   console.log(object);
+const showDocuments = async (object) => {
+  let val;
   try {
-    var val = await my_db
+    val = await my_db
       .getalluser(object, "document_management")
       .then((data) => {
         // logger.info("Your Data was posted sucessfully!!!");

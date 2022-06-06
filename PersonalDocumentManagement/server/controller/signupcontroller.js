@@ -1,9 +1,10 @@
 const my_db = require("../db");
 const logger = require("../logger/logger");
 
-var SignupForm = async (object) => {
+const SignupForm = async (object) => {
+  let val;
   try {
-    var val = await my_db
+    val = await my_db
       .add(object, "document_management")
       .then((data) => {
         logger.info("Your Data was posted sucessfully!!!");
