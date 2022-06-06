@@ -20,8 +20,9 @@ a:hover{
     /* position:relative; */
     position: static;
     background-color: rgb(39, 42, 47) ; 
-    width: 25vw;
-    height: 110vh;
+    width: 25vw;    
+    height: 102vh;
+
  }
  li{
  display: flex;
@@ -36,6 +37,10 @@ a:hover{
     background-color: white;
     margin-left: 55%;
     border: 1px solid black;
+}
+.card.mx-auto{
+    height: 10vh;
+    width: 10vw;
 }
 
 

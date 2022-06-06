@@ -6,6 +6,8 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class ApiServiceService {
+nav:boolean=true;
+hide:boolean=false;
   constructor(private  http:HttpClient) {
    }
    getfunction(){
@@ -86,4 +88,9 @@ export class ApiServiceService {
     }
     return this.http.post('http://localhost:8000/sendemail',obj)
   }
+  show(){
+    this.nav=false;
+    // this.hide=!this.hide;
+  }
+  
 }

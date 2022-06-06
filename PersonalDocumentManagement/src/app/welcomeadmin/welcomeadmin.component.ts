@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup,FormBuilder,Validators} from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-
+import { ApiServiceService } from '../api-service.service';
 
 @Component({
   selector: 'app-welcomeadmin',
@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 export class WelcomeadminComponent implements OnInit {
 OTP:any;
 otpForm!:FormGroup;
-  constructor(private formbuilder:FormBuilder,private toaster:ToastrService,private router:Router) { }
+  constructor(private formbuilder:FormBuilder,private toaster:ToastrService,private router:Router,private api:ApiServiceService) { }
 
   ngOnInit(): void {
     this.otpForm = this.formbuilder.group(
@@ -36,6 +36,7 @@ otpForm!:FormGroup;
     console.log( this.OTP);
 
      if(this.OTP == otp.otp) {
+      this.api.show();
       this.toaster.success("otp is correct");
       this.router.navigate(['/menu/adddocument'])
 

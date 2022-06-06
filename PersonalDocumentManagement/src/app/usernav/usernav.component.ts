@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiServiceService } from '../api-service.service';
 
 @Component({
   selector: 'app-usernav',
@@ -7,12 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UsernavComponent implements OnInit {
 
-  constructor() { }
+  constructor(private api:ApiServiceService) { }
 
   ngOnInit(): void {
   }
   sessiondestoy(){
     localStorage.removeItem('login');
+    this.api.show();
   }
 
 }
