@@ -8,11 +8,10 @@
             description
         </span>Document </li>
 
-    <li><a routerLink="/adddocument"> Add Document</a></li>
-    <li>Manage Document</li>
-    <li>Delete Document</li>
+    <li><a routerLink="/menu/adddocument"> Add Document</a></li>
+    <li> <a routerLink="/menu/managedoc"> Manage Document </a></li>
     <li><span class="material-symbols-outlined">
             logout
-        </span>Logout</li>
+        </span><a routerLink="/home" (click)="sessiondestoy();"> Logout </a></li>
 </ul>
 <router-outlet></router-outlet>

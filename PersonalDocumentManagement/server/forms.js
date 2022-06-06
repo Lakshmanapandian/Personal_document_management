@@ -8,6 +8,7 @@ const renamecontroller = require("./controller/renamecontroller");
 const bodyparser = require("body-parser");
 const multer = require("multer");
 const app = connection();
+const nodemail = require("nodemailer");
 const winlogger = require("./logger/logger");
 const Cloudant = require("@cloudant/cloudant");
 var url =
@@ -26,6 +27,8 @@ const { response } = require("express");
 const logger = require("./logger/logger");
 // // app.use(express.static("public"));
 app.use(connection.static("public"));
+const otpGenerator = require("otp-generator");
+
 app.use(bodyparser.json());
 app.use(
   cors({
@@ -64,7 +67,6 @@ app.post("/dashboard", (request, response) => {
       logger.warn("error ");
       response.send(err, "Faild to upload");
     });
-  console.log("Data added");
 });
 app.get("/getUser", (request, response) => {
   // console.log(request);
@@ -193,7 +195,10 @@ app.post("/username", (request, response) => {
           file_name: originalname,
           file_type: pathtype,
           user_id: username,
-          filepath: path.join(__dirname, "public/Uploads", `${username}`),
+          filepath: path.join(
+            "Personal_document_management\\PersonalDocumentManagement\\server\\public\\Uploads",
+            `${username}`
+          ),
           type: "files",
         };
         uploadcontroller
@@ -204,7 +209,7 @@ app.post("/username", (request, response) => {
           })
           .catch((err) => {
             logger.warn("error ");
-            response.send(err, "Faild to upload");
+            // response.send(err, "Faild to upload");
           });
         // console.log("Data added");
       },
@@ -224,40 +229,6 @@ app.post("/username", (request, response) => {
     });
   });
 });
-// app.post("/single", (req, res) => {
-//   var store = multer.diskStorage({
-//     destination: function (req, file, cb) {
-//       console.log(username);
-//       cb(null, `./${username}`);
-//     },
-//     filename: function (req, file, cb) {
-//       originalname = file.originalname;
-//       console.log(originalname);
-//       pathtype = file.mimetype;
-//       cb(null, originalname, pathtype);
-//       console.log(originalname + " uploaded");
-//       // var fileDetails = {
-//       //   file_name: originalname,
-//       //   file_type: pathtype,
-//       //   user_id: username,
-//       // };
-//       // console.log(fileDetails);
-//     },
-//   });
-//   var upload = multer({ storage: store }).single("image");
-
-//   upload(req, res, function (err) {
-//     if (err) {
-//       res.send({ status: 500, error: "Unable to process your request!" });
-//     } else {
-//       res.send({
-//         status: 200,
-//         error: "Success!",
-//         // originalname: originalname,
-//       });
-//     }
-//   });
-// });
 app.post("/userfiles", (request, response) => {
   username = request.body.username;
   // console.log(username);
@@ -288,9 +259,10 @@ app.post("/download", (request, response) => {
   downloadFilename = request.body.filename;
   // console.log(path);
   // console.log(downloadFilename);
-  const filess = `${path}\\${downloadFilename}`;
+  const filess = `D:\\${path}\\${downloadFilename}`;
   // console.log(filess);
   response.download(filess);
+
   // const dirpath = path.join(__dirname, `${path}`,${downloadFilename});
   // var filestream = fs.createReadStream(file);
   // filestream.pipe(res);
@@ -300,7 +272,7 @@ app.post("/localdelete", (request, response) => {
   deleteFilename = request.body.filename;
   // console.log(path);
   // console.log(deleteFilename);
-  const filess = `${path}\\${deleteFilename}`;
+  const filess = `D:\\${path}\\${deleteFilename}`;
   // console.log(filess);
   // console.log(filess);
   fs.unlinkSync(filess);
@@ -313,8 +285,8 @@ app.post("/localrename", (request, response) => {
   var extension = oldfilename.split(".");
   ext = extension[1];
   var newpath = request.body.newpath;
-  var oldname = oldpath + "\\" + oldfilename;
-  var newname = oldpath + "\\" + newpath + "." + ext;
+  var oldname = "D:\\" + oldpath + "\\" + oldfilename;
+  var newname = "D:\\" + oldpath + "\\" + newpath + "." + ext;
   // console.log(oldname);
   // console.log(newname);
   fs.rename(oldname, newname, () => {
@@ -358,6 +330,37 @@ app.post("/localrename", (request, response) => {
   //       });
   //   });
 });
+app.post("/sendemail", (request, response) => {
+  let otp = otpGenerator.generate(6, {
+    upperCaseAlphabets: false,
+    specialChars: false,
+    lowerCaseAlphabets: false,
+    digits: true,
+  });
+
+  var sender = nodemail.createTransport({
+    service: "outlook",
+    auth: {
+      user: "filetransify@outlook.com",
+      pass: " file@123",
+    },
+  });
+  var composemail = {
+    from: "filetransify@outlook.com",
+    to: request.body.emailId,
+    subject: `Message`,
+    text: `DO NOT SHARE:\nYour OTP for File Transfer:${otp}`,
+  };
+  sender.sendMail(composemail, function (err, res) {
+    if (err) {
+      console.log("Mail not sent", err);
+    } else {
+      console.log("Mail  sent", res);
+      response.send(otp);
+    }
+  });
+});
+
 app.listen(port, (err) => {
   if (err) {
     return console.log("something bad happened", err);

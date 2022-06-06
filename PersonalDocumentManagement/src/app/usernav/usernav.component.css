@@ -1,7 +1,9 @@
 .ul1{
-   background-color: rgb(39, 42, 47) ; 
+   background-color: rgb(32,37,41) ; 
    width: 25vw;
-   height: 100vh;
+   height: 86vh;
+   margin-top: -16px;
+
 }
 li{
 display: flex;
@@ -11,3 +13,11 @@ color: white;
 /* .ul2{
     display: none;
 } */
+a{
+    text-decoration: none;
+    color:white;
+}
+a:hover{
+    color: rgb(114, 114, 216);
+    text-decoration: underline;
+}

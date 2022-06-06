@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
   import { FormBuilder, FormControl,FormGroup,Validators,NgForm } from '@angular/forms';
   import { ApiServiceService } from '../api-service.service';
   import { Router } from '@angular/router';
+  import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -13,7 +14,7 @@ export class AdminComponent implements OnInit {
   adminForm!: FormGroup;
   flag = 0;
   notify = '';
-  constructor(private api:ApiServiceService,private formbuilder:FormBuilder,private route:Router) { }
+  constructor(private api:ApiServiceService,private formbuilder:FormBuilder,private route:Router,private toaster:ToastrService) { }
 
   ngOnInit(): void {
     this.api.getAdmin().subscribe((data)=>{
@@ -37,7 +38,7 @@ export class AdminComponent implements OnInit {
   }
   adminFormsData(formvalue: any){
      for(const i  of this.adminDetails){
-        if(i.username ==  formvalue.admin_name && i.password == formvalue.password){
+        if(i.admin_name ==  formvalue.admin_name && i.password == formvalue.password){
             this.flag = 1;
         }
      }
@@ -45,7 +46,7 @@ export class AdminComponent implements OnInit {
         this.route.navigate(['/admindashboard']); 
       }
       else{
-        this.notify="Invalid user";
+         this.toaster.error("Bad Credentials","invalid user")
       }
   }
 }

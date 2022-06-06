@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiServiceService } from '../api-service.service';
 import { FormGroup,FormBuilder ,Validators, FormsModule} from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 export var user = '';
 
 // import { NavbarComponent } from '../navbar/navbar.component';
@@ -14,7 +15,7 @@ export var user = '';
 export class LoginComponent implements OnInit {;
   userForm!:FormGroup;
   user:any;
-  constructor(private api:ApiServiceService,private formbuilder:FormBuilder,private router:Router) { 
+  constructor(private api:ApiServiceService,private formbuilder:FormBuilder,private router:Router,private toastrService: ToastrService) { 
   }
   user_id:any=[];
 alldata :any;
@@ -36,18 +37,26 @@ userFormData(formvalue:any){
   console.log(formvalue);
   for(const i  of this.object){
     if(i.username ==  formvalue.username && i.password == formvalue.password){
+      localStorage.setItem('login',JSON.stringify(i));
       localStorage.setItem('username',JSON.stringify(i._id) );
         this.flag = 1;
         this.api.getusername(i._id).subscribe((data:any)=>{
             
-        })
+        });
+        this.api.getEmail(i.email).subscribe((data:any)=>{
+          console.log("OTP")
+          localStorage.setItem('OTP',data);
+          console.log(data);
+        });
     }
  }
   if(this.flag == 1 ){
-    this.router.navigate(['/welcomeadmin']);
+    setTimeout(function(){
+    }, 10000);
+    this.router.navigate(['/menu/welcomeadmin']);
   }
   else{
-      this.notify = "invalid user";
+        this.toastrService.error("invalid user") ;
   }
  
 }

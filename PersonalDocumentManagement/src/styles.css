@@ -3,3 +3,5 @@
 body{
     background-color: rgb(56,64,79);
 }
+@import "~bootstrap/dist/css/bootstrap.min.css";
+@import '~ngx-toastr/toastr';

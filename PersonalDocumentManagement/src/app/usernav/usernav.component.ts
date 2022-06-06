@@ -11,5 +11,8 @@ export class UsernavComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  sessiondestoy(){
+    localStorage.removeItem('login');
+  }
 
 }

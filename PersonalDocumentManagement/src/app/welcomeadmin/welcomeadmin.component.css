@@ -1,12 +1,13 @@
 .card{
     position: absolute;
-    top: 6%;
-    left: 29%;
-    width: 68%;
-    height: 90%;
+    top: 40%;
+    left: 32%;
+    width: 35%;
+    height: 37%;
 }
 button{
     margin-left: 10px;
+    margin-top: 10px;
 }
 a{
     text-decoration: none;
@@ -20,6 +21,7 @@ a:hover{
     background-color: rgb(39, 42, 47) ; 
     width: 25vw;
     height: 110vh;
+
  }
  li{
  display: flex;
@@ -30,5 +32,7 @@ a:hover{
     display: grid;
     grid-template-areas:1fr 1fr 1fr 1fr;
  }
- div{
+  
+ app-usernav{
+     margin-top: -20px;
  }

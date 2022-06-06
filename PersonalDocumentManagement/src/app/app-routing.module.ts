@@ -7,25 +7,35 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { ManagedocComponent } from './managedoc/managedoc.component';
+import { NavbarComponent } from './navbar/navbar.component';
 import { RegisterComponent } from './register/register.component';
 import { UserdashboardComponent } from './userdashboard/userdashboard.component';
 import { UsernavComponent } from './usernav/usernav.component';
-import { WelcomeadminComponent } from './welcomeadmin/welcomeadmin.component';
+import { WelcomeadminComponent } from './welcomeadmin/welcomeadmin.component'
+import { AuthGuard } from './shared/authguard.guard';
 
 const routes: Routes = [
-  {path:'',component:HomeComponent},
+  {path:"home",redirectTo:'dashboard',pathMatch:'full'},
+  {path:'menu',canActivate:[AuthGuard],children:[
   {path:'login',component:LoginComponent},
-  {path:'register',component:RegisterComponent},
   {path:'dashboard',component:DashboardComponent},
-  {path:'admin',component:AdminComponent},
   {path:'adddocument',component:AdddocumentComponent},
   {path:'userdashboard',component:DashboardComponent},
-  {path:'admindashboard',component:AdminDashboardComponent},
   {path:'usernav',component:UsernavComponent},
-  {path:'home',component:HomeComponent},
   {path:'userdashboard',component:UserdashboardComponent},
   {path:'managedoc',component:ManagedocComponent},
   {path:'welcomeadmin',component:WelcomeadminComponent},
+  ]
+},
+{path:'login',component:LoginComponent},
+{path:'admindashboard',component:AdminDashboardComponent},
+{path:'admin',component:AdminComponent},
+{path:'home',component:HomeComponent},
+{path:'',component:HomeComponent},
+{path:'register',component:RegisterComponent},
+
+
+
 
 ];
 

@@ -80,4 +80,10 @@ export class ApiServiceService {
     console.log(obj);
     return this.http.post('http://localhost:8000/localrename',obj);
   }
+  getEmail(email:any){
+    var obj={
+      emailId :email
+    }
+    return this.http.post('http://localhost:8000/sendemail',obj)
+  }
 }

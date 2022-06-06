@@ -2,14 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormGroup,FormBuilder,Validators,NgForm, FormsModule,} from '@angular/forms';
 import { ApiServiceService } from '../api-service.service';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-adddocument',
   templateUrl: './adddocument.component.html',
   styleUrls: ['./adddocument.component.css']
 })
 export class AdddocumentComponent implements OnInit {
-  constructor(private formbuilder:FormBuilder,private el: ElementRef,private http:HttpClient,private api:ApiServiceService) { }
+  constructor(private formbuilder:FormBuilder,private el: ElementRef,private http:HttpClient,private api:ApiServiceService,private toaster:ToastrService) { }
 upload!:FormGroup;
 notify = '';
 add = false;
@@ -70,7 +70,7 @@ add = false;
   //  console.log(filename);
    for(const i  of this.files){
     if(i.file_name ==  filename){
-      alert("File already Uploaded");  
+      this.toaster.error("File already Uploaded");  
       this.upload.reset();
       // this.el.nativeElement.querySelector('#username').focus();
 
@@ -100,7 +100,7 @@ add = false;
           );
   
       }
-      this.notify = "file upload sucessfully"
+      this.toaster.success( "file upload sucessfully");
       setTimeout(function(){
         window.location.reload();
       }, 1000);

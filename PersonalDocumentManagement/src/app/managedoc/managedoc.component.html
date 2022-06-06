@@ -1,23 +1,9 @@
 <link rel="stylesheet"
     href="https://fonts.sandbox.google.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-<ul class="ul1">
-    <li> <span class="material-symbols-outlined">
-            home
-        </span> DashBoard</li>
-    <li><span class="material-symbols-outlined">
-            description
-        </span>Document </li>
-
-    <li><a routerLink="/adddocument"> Add Document</a></li>
-    <li><a routerLink="/managedoc"> Manage Document</a></li>
-    <li> <a href=""> Sharex</a></li>
-    <li><span class="material-symbols-outlined">
-            logout
-        </span><a routerLink=""> Logout</a></li>
-</ul>
-<router-outlet></router-outlet>
-<div class="card mx-auto" style="height: 90vh;
-width: 90w; margin-top:10px; background-color: rgb(201, 195, 195);">
+<app-usernav></app-usernav>
+<div class="card mx-auto" style="height: 40vh;
+width: 90vw;
+margin-top: 79px;">
     <!-- <div *ngFor="let obj of files" style="display:inline-flex">
         <div scope="row" (click)="download(obj.filepath,obj.file_name)" style="cursor: pointer;">
             <img src="../../images/file.webp" alt="" style="width:10vw;"> <br>{{obj.file_name}}
@@ -25,7 +11,7 @@ width: 90w; margin-top:10px; background-color: rgb(201, 195, 195);">
         </div>
     </div> -->
 
-    <table class="table bg-light" style="height:10vh">
+    <table class="table bg-light" style="height:10vh;table-layout:fixed;" aria-label="filedetails">
         <thead class="text-dark">
             <tr>
                 <th scope="col">filename</th>
@@ -35,21 +21,24 @@ width: 90w; margin-top:10px; background-color: rgb(201, 195, 195);">
 
             </tr>
         </thead>
-        <tbody class="text-dark" *ngFor="let obj of files">
+        <tbody class="text-dark" *ngFor="let obj of files" style="
+        overflow: scroll;">
             <tr>
                 <td scope="row" style="cursor: pointer;height:2vw;;">
                     <img src="../../images/file.webp" alt="" style="width:6vw;"> <br>
                     {{obj.file_name}}
 
                 </td>
-                <td scope="row"> {{obj.file_type}}</td>
-                <td scope="row"><button class="btn btn-outline-dark px-4 py-2"
+                <td scope="row" style=" overflow: hidden;"> {{obj.file_type}}</td>
+                <td scope="row" style=" overflow: hidden;"><button class="btn btn-outline-dark px-4 py-2"
                         (click)="download(obj.filepath,obj.file_name)" style="align-items: center;">Download</button>
                 </td>
-                <td scope="row"><button class="btn btn-outline-dark px-4 py-2" (click)="delete(obj._id,obj._rev)"
+                <td scope="row" style=" overflow: hidden;"><button class="btn btn-outline-dark px-4 py-2"
+                        (click)="delete(obj._id,obj._rev)"
                         (click)="localdelete(obj.filepath,obj.file_name)">Delete</button></td>
-                <td scope="row"><button class="btn btn-outline-dark px-4 py-2" (click)="this.renamediv = true "
-                        (click)="this.renamediv= true" (click)="oldpath(obj)">Rename</button>
+                <td scope="row" style=" overflow: hidden;"><button class="btn btn-outline-dark px-4 py-2"
+                        (click)="this.renamediv = true " (click)="this.renamediv= true"
+                        (click)="oldpath(obj)">Rename</button>
                 </td>
                 <!-- <td>
                     <form [formGroup]="rename" (ngSubmit)="renameLocal(this.rename.value,obj.filepath,obj.file_name)">
