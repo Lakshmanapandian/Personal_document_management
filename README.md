@@ -46,9 +46,7 @@ Personal document management  (PDM) is the used  store your files safely and acc
 7.   delete --> Delete the file using path and filename and store the files in user's folder.
 
 8.  Rename-->Rename the file Using path and filename and rename the file in local and update in database
-
-9.  Add insurance --> Add the insurance details to the particular vehicle.
-10.  
+ 
 # Install and run it locally
 
 1.  Download or clone the repository to your local machine:
