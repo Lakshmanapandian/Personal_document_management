@@ -4,13 +4,6 @@
 <div class="card mx-auto" style="height: 10vh;
 width: 63vw;
 margin-top: 79px;">
-    <!-- <div *ngFor="let obj of files" style="display:inline-flex">
-        <div scope="row" (click)="download(obj.filepath,obj.file_name)" style="cursor: pointer;">
-            <img src="../../images/file.webp" alt="" style="width:10vw;"> <br>{{obj.file_name}}
-
-        </div>
-    </div> -->
-
     <table class="table bg-light" aria-label="filedetails">
         <thead class="text-dark">
             <tr>
@@ -35,29 +28,11 @@ margin-top: 79px;">
                 </td>
                 <td scope="row" style=" overflow: hidden;"><button class="btn btn-outline-dark px-4 py-2"
                         (click)="delete(obj._id,obj._rev)"
-                        (click)="localdelete(obj.filepath,obj.file_name)">Delete</button></td>
+                        (click)="localDelete(obj.filepath,obj.file_name)">Delete</button></td>
                 <td scope="row" style=" overflow: hidden;"><button class="btn btn-outline-dark px-4 py-2"
                         (click)="this.renamediv = true " (click)="this.renamediv= true"
-                        (click)="oldpath(obj)">Rename</button>
+                        (click)="oldPath(obj)">Rename</button>
                 </td>
-                <!-- <td>
-                    <form [formGroup]="rename" (ngSubmit)="renameLocal(this.rename.value,obj.filepath,obj.file_name)">
-                        <input type="text" class="form-control" placeholder="Rename File" formControlName="files"
-                            id="document">
-                        <button class="btn btn-outline-dark px-4 py-2" style="margin-top:10px"
-                            (click)=renameLocal(this.rename.values,obj.filepath,obj.file_name)
-                            type="submit">Rename</button>
-                    </form>
-                </td> -->
-                <!-- <div *ngFor="let obj of files">
-                <i class="{{getFileExtension(obj.file_name)}}" style="color:#5cb85c;" aria-hidden="true"></i>
-                {{obj.file}}
-            </div> -->
-                <!-- image.png
-                <i class="{{getFileExtension(obj.file_name)}}" style="color:#5cb85c;" aria-hidden="true"></i>
-                {{obj.file_name}} -->
-
-
             </tr>
         </tbody>
     </table>
@@ -76,7 +51,7 @@ margin-top: 79px;">
                 style="width:10rem;margin-left: 10px;">
         </div>
         <div style="margin-top: 20px;">
-            <button type="submit" class="btn btn-outline-dark" (click)="renameDatabase(this.rename.value)">Rename
+            <button type="submit" class="btn btn-outline-dark">Rename
             </button>
             <button type="submit" class="btn btn-outline-dark" (click)="this.renamediv = false">Cancel</button>
         </div>

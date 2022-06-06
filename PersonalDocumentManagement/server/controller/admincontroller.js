@@ -2,9 +2,9 @@ const my_db = require("../db");
 const logger = require("../logger/logger");
 
 const getadmin = async (obj) => {
-  let val;
+  let getAdminDetails;
   try {
-    val = await my_db
+    getAdminDetails = await my_db
       .getalluser(obj, "document_management")
       .then((data) => {
         logger.info("Your get was fetched sucessfully!!!");
@@ -17,12 +17,12 @@ const getadmin = async (obj) => {
   } catch (error) {
     console.log("OOPS!!!Error  from getdmin");
   }
-  return val;
+  return getAdminDetails;
 };
 const deleteuser = async (id, rev) => {
-  let val;
+  let deleteUserDetails;
   try {
-    val = await my_db
+    deleteUserDetails = await my_db
       .deleteuser(id, rev, "document_management")
       .then((data) => {
         logger.info("Your get was fetched sucessfully!!!");
@@ -35,6 +35,6 @@ const deleteuser = async (id, rev) => {
   } catch (error) {
     console.log("OOPS!!!Error  from deleteuser ");
   }
-  return val;
+  return deleteUserDetails;
 };
 module.exports = { getadmin, deleteuser };

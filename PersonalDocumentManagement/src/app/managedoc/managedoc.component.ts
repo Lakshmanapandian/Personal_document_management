@@ -39,16 +39,14 @@ renamediv = false;
       console.log(this.allfiles);
       for(const i of this.allfiles){
         this.files.push(i);
-        // this.filenames.push(i.file_name);
     } 
        });  
-      // console.log(this.files);
+ 
       this.rename = this.formbuilder.group(
         {
           'files':['',Validators.required],
         }
         )
-        // console.log(this.newfilepath);
 }
 
 download(filepath:any,filename:any){
@@ -64,14 +62,14 @@ delete(doc_Id:any,doc_rev:any)
     location.reload();
   })
 }
-localdelete(filepath:any,filename:any){
+localDelete(filepath:any,filename:any){
   this.api.localdelete(filepath,filename).subscribe((data:any)=>{
     console.log('Your data was Deleted from the Local directory');
     window.alert('sucessfully deleted');
   })
   
 }
-oldpath(object:any){
+oldPath(object:any){
   localStorage.setItem('renameobj',JSON.stringify(object));
 
 } 
