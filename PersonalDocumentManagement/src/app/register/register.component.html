@@ -31,8 +31,7 @@
                 <div class="form-group">
                     <label for="email" class="text-dark">Email :</label>
                     <input type="email" formControlName="email" class="form-control" placeholder="Enter Your Email "
-                        (focusout)="checkduplicateEmail($event)"
-                        pattern="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$                                         ">
+                        (focusout)="checkduplicateEmail($event)" pattern="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$">
                     <span class="text-danger"
                         *ngIf="signup.controls['email'].touched && signup.hasError('required','email')">*Email is
                         required </span>
