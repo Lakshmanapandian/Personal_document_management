@@ -25,7 +25,7 @@ Personal document management  (PDM) is the used  store your files safely and acc
                                  -  Delete files in Local directory
                                  -  Download files  from Local directory
                                  -  Rename files in Local directory
-                                 -Delete files in Database
+                                 -  Delete files in Database
                                  -  Rename files in database
                                  - Logout
 
