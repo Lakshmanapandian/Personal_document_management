@@ -7,7 +7,6 @@ import { ApiServiceService } from '../api-service.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  // navbar = true;
   constructor(public api:ApiServiceService) { }
 
   ngOnInit(): void {

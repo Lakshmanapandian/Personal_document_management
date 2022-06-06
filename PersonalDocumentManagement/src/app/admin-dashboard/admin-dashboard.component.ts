@@ -23,20 +23,14 @@ usertable = false;
       this.alldata=this.alldata.docs;
       console.log(this.alldata);
       for(const i of  this.alldata){
-          // const elt = this.alldata[i];
-          // console.log(elt.id);
-          // this.api.getUserId(elt.id).subscribe(res=>{
-            // console.log(res);
             this.object.push(i);
             console.log('Fetched successfuly');
-          // })
       }
     })
   }
   deleteuser(data:any,data1:any){
     this.api.remove(data._id,data1._rev).subscribe(res=>{
       console.log('Your data was Deleted from the database');
-      // this.user = false;
       window.alert('sucessfully deleted');
       location.reload();
     })

@@ -1,4 +1,3 @@
-// const Cloudant = require("@cloudant/cloudant");
 const nano = require("nano");
 const { resolve } = require("dns");
 const { promise } = require("protractor");
@@ -23,7 +22,6 @@ var getalluser = function (value, dbname) {
       return reject(value);
     } else {
       var db = nanodb.use(dbname).find(value);
-      // console.log(db)
       return resolve(db);
     }
   });

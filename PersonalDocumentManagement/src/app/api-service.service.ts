@@ -33,21 +33,21 @@ hide:boolean=false;
   }
   getusername(username:any)
   {
-    var obj={
+    let obj={
       username:username,
     }
     console.log(obj.username);
      return this.http.post('http://localhost:8000/username',obj);
   }
   getuserfiles(username:any){
-    var obj={
+    let obj={
       username:username,
     }
     console.log(obj);
     return this.http.post('http://localhost:8000/userfiles',obj);
   }
   uploadFiles(formdata:any,user_id:any){
-    var obj = {
+    let obj = {
       userid:user_id,
       formdata:formdata,
     }
@@ -55,21 +55,21 @@ hide:boolean=false;
     return this.http.post('http://localhost:8000/single',obj);
   }
   download(path:any,filename:any){
-    var obj={
+    let obj={
       filepath :path,
       filename :filename
     }
     return this.http.post('http://localhost:8000/download',obj,{responseType:'blob'});
   }
   localdelete(path:any,filename:any){
-    var obj={
+    let obj={
       filepath :path,
       filename :filename
     }
     return this.http.post('http://localhost:8000/localdelete',obj);
   }
   rename(oldpath:any,newpath:any){
-    var obj = {
+    let obj = {
       oldfilename : oldpath.file_name,
       oldtype :oldpath.file_type,
       oldfilepath : oldpath.filepath,
@@ -83,14 +83,13 @@ hide:boolean=false;
     return this.http.post('http://localhost:8000/localrename',obj);
   }
   getEmail(email:any){
-    var obj={
+    let obj={
       emailId :email
     }
     return this.http.post('http://localhost:8000/sendemail',obj)
   }
   show(){
     this.nav=false;
-    // this.hide=!this.hide;
   }
   
 }

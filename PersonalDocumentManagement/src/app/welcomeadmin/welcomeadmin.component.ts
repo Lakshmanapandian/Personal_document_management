@@ -38,10 +38,7 @@ otpForm!:FormGroup;
      if(this.OTP == otp.otp) {
       this.api.show();
       this.toaster.success("otp is correct");
-      this.router.navigate(['/menu/adddocument'])
-
-    // localStorage.removeItem('OTP');
-
+      this.router.navigate(['/menu/adddocument']);
      }
      else{
        this.toaster.error("otp is incorrect");

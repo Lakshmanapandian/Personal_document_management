@@ -25,7 +25,6 @@ const { request } = require("http");
 const e = require("express");
 const { response } = require("express");
 const logger = require("./logger/logger");
-// // app.use(express.static("public"));
 app.use(connection.static("public"));
 const otpGenerator = require("otp-generator");
 
@@ -36,18 +35,7 @@ app.use(
   })
 );
 var urlParser = bodyparser.urlencoded({ extended: false });
-// app.get("/", function (request, response) {
-//   var data = file.readFileSync("details.json");
-
-//   var details = JSON.parse(data);
-//   console.log("From get functin", details);
-//   exports.dataset = details;
-
-//   //   response.sendFile(`${__dirname}/`);
-// });
-
 app.post("/dashboard", (request, response) => {
-  // console.log(request);
   var object = {
     username: request.body.username,
     first_name: request.body.first_name,
@@ -69,7 +57,6 @@ app.post("/dashboard", (request, response) => {
     });
 });
 app.get("/getUser", (request, response) => {
-  // console.log(request);
   var data = {
     selector: {
       type: "user",
@@ -78,7 +65,6 @@ app.get("/getUser", (request, response) => {
   signupcontroller
     .getusers(data)
     .then((res) => {
-      // console.log(res);
       logger.info(" Login - user data successfully fetched");
       response.send(res);
     })
@@ -87,16 +73,6 @@ app.get("/getUser", (request, response) => {
       response.send(err, " login Faild  to get");
     });
 });
-
-// app.get("/getUserId/:id", (request, response) => {
-//   dbconnection.getId(request.params.id, "document_management").then((res) => {
-//     if (res) {
-//       response.send(res);
-//     } else {
-//       response.send("error");
-//     }
-//   });
-// });
 app.delete("/delete_items/:id/:id1", (request, response) => {
   admincontroller
     .deleteuser(request.params.id, request.params.id1)
@@ -110,7 +86,6 @@ app.delete("/delete_items/:id/:id1", (request, response) => {
     });
 });
 app.get("/getAdminId", (request, response) => {
-  // console.log(request);
   logger.info("fetching Admin Details");
   var data = {
     selector: {
@@ -120,7 +95,6 @@ app.get("/getAdminId", (request, response) => {
   admincontroller
     .getadmin(data)
     .then((res) => {
-      // console.log(res);
       logger.info(" AdminLogin - Admin data successfully fetched");
       response.send(res);
     })
@@ -129,51 +103,9 @@ app.get("/getAdminId", (request, response) => {
       response.send(err, " adminlogin Failed  to get");
     });
 });
-// app.get("/getAdminId/:id", (request, response) => {
-//   dbconnection.getId(request.params.id, "document_management").then((res) => {
-//     if (res) {
-//       response.send(res);
-//     } else {
-//       response.send("error");
-//     }
-//   });
-// });
-// __________________________________________________________________________
-// app.post("/single", (req, res) => {
-//   // var originalname = "";
-//   // let title = req.body.title;
-//   // console.log(title);
-
-//   var store = multer.diskStorage({
-//     destination: function (req, file, cb) {
-//       cb(null, `./${username}` );
-//     },
-//     filename: function (req, file, cb) {
-//       originalname = file.originalname;
-//       cb(null, originalname);
-//       console.log(originalname + " uploaded");
-//     },
-//   });
-
-//   var upload = multer({ storage: store }).single("image");
-
-//   upload(req, res, function (err) {
-//     if (err) {
-//       res.send({ status: 500, error: "Unable to process your request!" });
-//     } else {
-//       res.send({ status: 200, error: "Success!", originalname: originalname });
-//     }
-//   });
-// });
-// ______________________________________________________________
-// "\\public\\Uploads\\"
-// app.get("/test", (request, response) => {
-//   console.log( "name"));
-// });
 app.post("/username", (request, response) => {
   username = request.body.username;
   if (fs.existsSync(path.join(__dirname, "public/Uploads", username))) {
-    // console.log("folder  already exits");
     logger.info("Folder already exist");
   } else {
     fs.mkdirSync(path.join(__dirname, "public/Uploads", username));
@@ -182,12 +114,10 @@ app.post("/username", (request, response) => {
   app.post("/single", (req, res) => {
     var store = multer.diskStorage({
       destination: function (req, file, cb) {
-        // console.log(username);
         cb(null, path.join(__dirname, "public/Uploads", username));
       },
       filename: function (req, file, cb) {
         originalname = file.originalname;
-        // console.log(originalname);
         pathtype = file.mimetype;
         cb(null, originalname, pathtype);
         logger.info(originalname + " uploaded");
@@ -209,9 +139,7 @@ app.post("/username", (request, response) => {
           })
           .catch((err) => {
             logger.warn("error ");
-            // response.send(err, "Faild to upload");
           });
-        // console.log("Data added");
       },
     });
     var upload = multer({ storage: store }).single("image");
@@ -231,7 +159,6 @@ app.post("/username", (request, response) => {
 });
 app.post("/userfiles", (request, response) => {
   username = request.body.username;
-  // console.log(username);
   var data = {
     selector: {
       user_id: username,
@@ -240,7 +167,6 @@ app.post("/userfiles", (request, response) => {
   uploadcontroller
     .showDocuments(data)
     .then((res) => {
-      // console.log(res);
       logger.info(" Document show -  data successfully fetched");
       response.send(res);
     })
@@ -249,32 +175,16 @@ app.post("/userfiles", (request, response) => {
       response.send(err, " Document  Failed  to get");
     });
 });
-
-// const dirpath = path.join(__dirname, `${username}`);
-// fs.readdir(dirpath, (err, files) => {
-//   response.json(files);
-// });
 app.post("/download", (request, response) => {
   var path = request.body.filepath;
   downloadFilename = request.body.filename;
-  // console.log(path);
-  // console.log(downloadFilename);
   const filess = `D:\\${path}\\${downloadFilename}`;
-  // console.log(filess);
   response.download(filess);
-
-  // const dirpath = path.join(__dirname, `${path}`,${downloadFilename});
-  // var filestream = fs.createReadStream(file);
-  // filestream.pipe(res);
 });
 app.post("/localdelete", (request, response) => {
   var path = request.body.filepath;
   deleteFilename = request.body.filename;
-  // console.log(path);
-  // console.log(deleteFilename);
   const filess = `D:\\${path}\\${deleteFilename}`;
-  // console.log(filess);
-  // console.log(filess);
   fs.unlinkSync(filess);
   logger.info(`${deleteFilename} deleted`);
 });
@@ -287,8 +197,6 @@ app.post("/localrename", (request, response) => {
   var newpath = request.body.newpath;
   var oldname = "D:\\" + oldpath + "\\" + oldfilename;
   var newname = "D:\\" + oldpath + "\\" + newpath + "." + ext;
-  // console.log(oldname);
-  // console.log(newname);
   fs.rename(oldname, newname, () => {
     logger.info("file renamed successfully");
   });
@@ -302,11 +210,9 @@ app.post("/localrename", (request, response) => {
     filepath: request.body.oldfilepath,
     type: request.body.type,
   };
-  // console.log(newobject);
   renamecontroller
     .renameDocuments(newobject)
     .then((res) => {
-      // console.log(res);
       logger.info(" Document rename -  data successfully fetched");
       response.send(res);
     })
@@ -314,21 +220,6 @@ app.post("/localrename", (request, response) => {
       logger.warn("error");
       response.send(err, " Document  Failed  to rename");
     });
-  // cloudant
-  //   .use("document_management")
-  //   .find({ selector: { _id: _id } }, (err, documents) => {
-  //     var revision = documents.docs[0]._rev;
-  //     const data = { ...documents.docs[0], ...newData };
-  //     cloudant
-  //       .use("document_management")
-  //       .insert(data, { _rev: revision }, function (err) {
-  //         if (!err) {
-  //           console.log(`${oldfilename} renamed as  ${newpath}.${ext}`);
-  //         } else {
-  //           console.log("failure", err);
-  //         }
-  //       });
-  //   });
 });
 app.post("/sendemail", (request, response) => {
   let otp = otpGenerator.generate(6, {

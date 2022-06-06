@@ -3,9 +3,6 @@ import { ApiServiceService } from '../api-service.service';
 import { FormGroup,FormBuilder ,Validators, FormsModule} from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-export var user = '';
-
-// import { NavbarComponent } from '../navbar/navbar.component';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -69,13 +66,7 @@ getallusers(){
       this.alldata=this.alldata.docs;
       console.log(this.alldata);
       for(const i of this.alldata){
-          // const elt = this.alldata[i];
-          // console.log(elt.id);
-          // this.api.getUserId(elt.id).subscribe(res=>{
-            // console.log(res);
-          
             this.object.push(i);
-          // })
       }
       console.log('Fetched successfuly');
 

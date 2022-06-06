@@ -71,36 +71,15 @@ localdelete(filepath:any,filename:any){
   })
   
 }
-// getFileExtension(filename:any) { // this will give you icon class name
-//   let ext = filename.split(".").pop();
-//   let obj = this.iconList.filter(row => {
-//     if (row.type === ext) {
-//       return true;
-//     }
-//   });
-//   if (obj.length > 0) {
-//     let icon = obj[0].icon;
-//     return icon;
-//   } else {
-//     return "";
-//   }
-// 
 oldpath(object:any){
-  // let oldpath = path + "\\" + filename;
   localStorage.setItem('renameobj',JSON.stringify(object));
 
 } 
 renameLocal(filename:any){
-  // let oldpath = localStorage.getItem('path');
-  // let oldfilename = localStorage.getItem('filename')
-  // let _id = localStorage.getItem('_id');
   let oldobj:any = localStorage.getItem('renameobj');
   let parsedold :any = JSON.parse(oldobj);
   console.log(parsedold);
-  let newpath = filename.files;
-  // localStorage.removeItem('path');
-  // localStorage.removeItem('filename');
-  // localStorage.removeItem('_id');  
+  let newpath = filename.files;  
 this.api.rename(parsedold,newpath).subscribe((data:any)=>{
 console.log(data);
 });
@@ -108,15 +87,5 @@ setTimeout(function(){
   window.location.reload();
 }, 10);
 }
-renameDatabase(filename:any){
-  // let oldpath = localStorage.getItem('path');
-  // let oldfilename = localStorage.getItem('filename')
-  //  console.log(oldpath);
-  //  console.log(filename);
-  // let newpath = filename.files;
-  // localStorage.removeItem('path');
-  // localStorage.removeItem('filename')
-}
-
 }
 

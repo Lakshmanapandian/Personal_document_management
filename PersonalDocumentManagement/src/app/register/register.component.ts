@@ -16,9 +16,6 @@ export class RegisterComponent implements OnInit {
   object :any = [];
   alert=false;
   constructor(private formbuilder:FormBuilder,private api:ApiServiceService,private el:ElementRef,private toastrService: ToastrService,private router:Router) {
-    // this.api.connecting().subscribe(data =>{
-    //   console.log(data);
-    // })
    }
  
   ngOnInit(): void {
@@ -36,7 +33,6 @@ export class RegisterComponent implements OnInit {
   }
   checkduplicateuser(event:any){
        let usernamecheck = (event.target.value);
-    // let flag=0;
     for(const i  of this.object){
       if(i.username ==  usernamecheck){
         this.toastrService.error("username already taken");  
@@ -52,7 +48,6 @@ export class RegisterComponent implements OnInit {
     for(const i  of this.object){
       if(i.email ==  emailcheck){
         this.toastrService.error("email already taken");  
-        // emailcheck.focus(event.target.value);
       }
     }
   }
@@ -73,19 +68,10 @@ export class RegisterComponent implements OnInit {
       this.alldata=this.alldata.docs;
       console.log(this.alldata);
       for(const i of  this.alldata){
-          // const elt = this.alldata[i];
-          // console.log(elt.id);
-          // this.api.getUserId(elt.id).subscribe(res=>{
-            // console.log(res);
             this.object.push(i);
             console.log('Fetched successfuly');
-          // })
       }
     })
- 
-  }
-  function1(msg:any){
-    this.toastrService.error(msg);
   }
 }
 
