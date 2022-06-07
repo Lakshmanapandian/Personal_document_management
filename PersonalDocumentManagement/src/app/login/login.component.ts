@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiServiceService } from '../api-service.service';
-import { FormGroup,FormBuilder ,Validators, FormsModule} from '@angular/forms';
+import { FormGroup,FormBuilder ,Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 @Component({
@@ -9,7 +9,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./login.component.css']
 })
 
-export class LoginComponent implements OnInit {;
+export class LoginComponent implements OnInit {
   userForm!:FormGroup;
   user:any;
   constructor(private api:ApiServiceService,private formbuilder:FormBuilder,private router:Router,private toastrService: ToastrService) { 

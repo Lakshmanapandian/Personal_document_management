@@ -20,9 +20,9 @@ const downloadPackage = require("download");
 const port = 8000;
 const cors = require("cors");
 const dbconnection = require("./db");
-const { request } = require("http");
+
 const e = require("express");
-const { response } = require("express");
+
 const logger = require("./logger/logger");
 app.use(connection.static("public"));
 const otpGenerator = require("otp-generator");
@@ -55,7 +55,7 @@ app.post("/dashboard", (request, response) => {
       response.send(err, "Faild to upload");
     });
 });
-app.get("/getUser", (request, response) => {
+app.get("/getUser", (_request, response) => {
   let data = {
     selector: {
       type: "user",
@@ -84,7 +84,7 @@ app.delete("/delete_items/:id/:id1", (request, response) => {
       response.send(err, " login Faild  to get");
     });
 });
-app.get("/getAdminId", (request, response) => {
+app.get("/getAdminId", (_request, response) => {
   logger.info("fetching Admin Details");
   let data = {
     selector: {
@@ -103,41 +103,41 @@ app.get("/getAdminId", (request, response) => {
     });
 });
 app.post("/username", (request, response) => {
-  let username = request.body.username;
-  if (fs.existsSync(path.join(__dirname, "public/Uploads", username))) {
+  let folderName = request.body.username;
+  if (fs.existsSync(path.join(__dirname, "public/Uploads", folderName))) {
     logger.info("Folder already exist");
   } else {
-    fs.mkdirSync(path.join(__dirname, "public/Uploads", username));
-    logger.info(`${username} folder created`);
+    fs.mkdirSync(path.join(__dirname, "public/Uploads", folderName));
+    logger.info(`${folderName} folder created`);
   }
   app.post("/single", (req, res) => {
     let store = multer.diskStorage({
-      destination: function (req, file, cb) {
-        cb(null, path.join(__dirname, "public/Uploads", username));
+      destination: function (_req, _file, cb) {
+        cb(null, path.join(__dirname, "public/Uploads", folderName));
       },
-      filename: function (req, file, cb) {
-        originalname = file.originalname;
-        pathtype = file.mimetype;
+      filename: function (_req, file, cb) {
+        let originalname = file.originalname;
+        let pathtype = file.mimetype;
         cb(null, originalname, pathtype);
         logger.info(originalname + " uploaded");
         let fileDetails = {
           file_name: originalname,
           file_type: pathtype,
-          user_id: username,
+          user_id: folderName,
           filepath: path.join(
             "Personal_document_management\\PersonalDocumentManagement\\server\\public\\Uploads",
-            `${username}`
+            `${folderName}`
           ),
           type: "files",
         };
         uploadcontroller
           .UploadForm(fileDetails)
-          .then((res) => {
+          .then((data) => {
             logger.info("Uploaded successfully");
-            response.send(res);
+            response.send(data);
           })
           .catch((err) => {
-            logger.warn("error ");
+            logger.warn(err);
           });
       },
     });
@@ -175,31 +175,31 @@ app.post("/userfiles", (request, response) => {
     });
 });
 app.post("/download", (request, response) => {
-  let path = request.body.filepath;
+  let downloadpath = request.body.filepath;
   let downloadFilename = request.body.filename;
-  let filess = `D:\\${path}\\${downloadFilename}`;
+  let filess = `D:\\${downloadpath}\\${downloadFilename}`;
   response.download(filess);
 });
 app.post("/localdelete", (request, response) => {
-  let path = request.body.filepath;
+  let deletepath = request.body.filepath;
   let deleteFilename = request.body.filename;
-  let filess = `D:\\${path}\\${deleteFilename}`;
+  let filess = `D:\\${deletepath}\\${deleteFilename}`;
   fs.unlinkSync(filess);
   logger.info(`${deleteFilename} deleted`);
+  response.send("file deleted sucesfully");
 });
 app.post("/localrename", (request, response) => {
-  oldpath = request.body.oldfilepath;
-  oldfilename = request.body.oldfilename;
-  _id = request.body._id;
-  extension = oldfilename.split(".");
-  ext = extension[1];
-  newpath = request.body.newpath;
-  oldname = "D:\\" + oldpath + "\\" + oldfilename;
-  newname = "D:\\" + oldpath + "\\" + newpath + "." + ext;
+  let oldpath = request.body.oldfilepath;
+  let oldfilename = request.body.oldfilename;
+  let extension = oldfilename.split(".");
+  let ext = extension[1];
+  let newpath = request.body.newpath;
+  let oldname = "D:\\" + oldpath + "\\" + oldfilename;
+  let newname = "D:\\" + oldpath + "\\" + newpath + "." + ext;
   fs.rename(oldname, newname, () => {
     logger.info("file renamed successfully");
   });
-  newfilename = newpath + "." + ext;
+  let newfilename = newpath + "." + ext;
   let newobject = {
     _id: request.body.oldid,
     _rev: request.body.oldrev,
