@@ -7,12 +7,12 @@ import { ApiServiceService } from '../api-service.service';
 })
 export class AdminDashboardComponent implements OnInit {
 alldata :any;
-// user =  true;
 object:any=[];
 usertable = false;
   constructor( private api:ApiServiceService) { }
 
   ngOnInit(): void {
+  console.log("ngOnInit");
   }
   getuser(){
    this.usertable = !this.usertable;
@@ -30,6 +30,7 @@ usertable = false;
   }
   deleteuser(data:any,data1:any){
     this.api.remove(data._id,data1._rev).subscribe(res=>{
+      console.log(res);
       console.log('Your data was Deleted from the database');
       window.alert('sucessfully deleted');
       location.reload();

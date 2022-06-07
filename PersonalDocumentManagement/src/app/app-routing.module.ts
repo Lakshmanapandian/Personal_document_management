@@ -33,10 +33,7 @@ const routes: Routes = [
 {path:'home',component:HomeComponent},
 {path:'',component:HomeComponent},
 {path:'register',component:RegisterComponent},
-
-
-
-
+{path:'navbar',component:NavbarComponent},
 ];
 
 @NgModule({

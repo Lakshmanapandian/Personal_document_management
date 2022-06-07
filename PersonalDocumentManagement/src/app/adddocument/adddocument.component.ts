@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, OnInit } from '@angular/core';
-import { FormGroup,FormBuilder,Validators,NgForm, FormsModule,} from '@angular/forms';
+import { FormGroup,FormBuilder,Validators,NgForm} from '@angular/forms';
 import { ApiServiceService } from '../api-service.service';
 import { ToastrService } from 'ngx-toastr';
 @Component({
