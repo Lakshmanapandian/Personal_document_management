@@ -41,8 +41,8 @@ userFormData(formvalue:any){
             
         });
         this.api.getEmail(i.email).subscribe((data:any)=>{
-          console.log("OTP")
-          localStorage.setItem('OTP',data);
+          console.log("OTP");
+          localStorage.setItem('OTP',JSON.stringify(data));
           console.log(data);
         });
     }

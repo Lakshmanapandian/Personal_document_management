@@ -2,9 +2,9 @@ const my_db = require("../db");
 const logger = require("../logger/logger");
 
 const SignupForm = async (object) => {
-  let val;
+  let SignupFormDetails;
   try {
-    val = await my_db
+    SignupFormDetails = await my_db
       .add(object, "document_management")
       .then((data) => {
         logger.info("Your Data was posted sucessfully!!!");
@@ -17,12 +17,13 @@ const SignupForm = async (object) => {
   } catch (error) {
     console.log("OOPS!!!Error");
   }
-  return val;
+  return SignupFormDetails;
 };
 
-var getusers = async (obj) => {
+const getusers = async (obj) => {
+  let getUsersDetails;
   try {
-    var val = await my_db
+    getUsersDetails = await my_db
       .getalluser(obj, "document_management")
       .then((data) => {
         logger.info("Your get was fetched sucessfully!!!");
@@ -35,11 +36,12 @@ var getusers = async (obj) => {
   } catch (error) {
     console.log("OOPS!!!Error  from login");
   }
-  return val;
+  return getUsersDetails;
 };
-var deleteuser = async (id, rev) => {
+const deleteuser = async (id, rev) => {
+  let deleteUserDetails;
   try {
-    var val = await my_db
+    deleteUserDetails = await my_db
       .deleteuser(id, rev, "document_management")
       .then((data) => {
         logger.info("Your get was fetched sucessfully!!!");
@@ -52,7 +54,7 @@ var deleteuser = async (id, rev) => {
   } catch (error) {
     console.log("OOPS!!!Error  from login");
   }
-  return val;
+  return deleteUserDetails;
 };
 
 module.exports = {

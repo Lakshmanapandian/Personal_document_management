@@ -11,11 +11,11 @@ const app = connection();
 const nodemail = require("nodemailer");
 const winlogger = require("./logger/logger");
 const Cloudant = require("@cloudant/cloudant");
-var url =
+let url =
   "https://2fbcb9ec-d57d-431a-8d72-186d88ddf478-bluemix.cloudantnosqldb.appdomain.cloud";
-var username = "apikey-v2-kf8ex4frj52lu2wwin72qqktpi3occ9bfv4p80vbr99";
-var password = "68fc5b9dc8c58071087abaecc44a5f29";
-var cloudant = Cloudant({ url: url, username: username, password: password });
+let username = "apikey-v2-kf8ex4frj52lu2wwin72qqktpi3occ9bfv4p80vbr99";
+let password = "68fc5b9dc8c58071087abaecc44a5f29";
+let cloudant = Cloudant({ url: url, username: username, password: password });
 const path = require("path");
 const downloadPackage = require("download");
 const port = 8000;
@@ -34,9 +34,9 @@ app.use(
     origin: "http://localhost:4200",
   })
 );
-var urlParser = bodyparser.urlencoded({ extended: false });
+let urlParser = bodyparser.urlencoded({ extended: false });
 app.post("/dashboard", (request, response) => {
-  var object = {
+  let object = {
     username: request.body.username,
     first_name: request.body.first_name,
     last_name: request.body.last_name,
@@ -57,7 +57,7 @@ app.post("/dashboard", (request, response) => {
     });
 });
 app.get("/getUser", (request, response) => {
-  var data = {
+  let data = {
     selector: {
       type: "user",
     },
@@ -87,7 +87,7 @@ app.delete("/delete_items/:id/:id1", (request, response) => {
 });
 app.get("/getAdminId", (request, response) => {
   logger.info("fetching Admin Details");
-  var data = {
+  let data = {
     selector: {
       type: "admin",
     },
@@ -104,7 +104,7 @@ app.get("/getAdminId", (request, response) => {
     });
 });
 app.post("/username", (request, response) => {
-  username = request.body.username;
+  let username = request.body.username;
   if (fs.existsSync(path.join(__dirname, "public/Uploads", username))) {
     logger.info("Folder already exist");
   } else {
@@ -112,7 +112,7 @@ app.post("/username", (request, response) => {
     logger.info(`${username} folder created`);
   }
   app.post("/single", (req, res) => {
-    var store = multer.diskStorage({
+    let store = multer.diskStorage({
       destination: function (req, file, cb) {
         cb(null, path.join(__dirname, "public/Uploads", username));
       },
@@ -121,7 +121,7 @@ app.post("/username", (request, response) => {
         pathtype = file.mimetype;
         cb(null, originalname, pathtype);
         logger.info(originalname + " uploaded");
-        var fileDetails = {
+        let fileDetails = {
           file_name: originalname,
           file_type: pathtype,
           user_id: username,
@@ -142,7 +142,7 @@ app.post("/username", (request, response) => {
           });
       },
     });
-    var upload = multer({ storage: store }).single("image");
+    let upload = multer({ storage: store }).single("image");
 
     upload(req, res, function (err) {
       if (err) {
@@ -159,7 +159,7 @@ app.post("/username", (request, response) => {
 });
 app.post("/userfiles", (request, response) => {
   username = request.body.username;
-  var data = {
+  let data = {
     selector: {
       user_id: username,
     },
@@ -176,32 +176,32 @@ app.post("/userfiles", (request, response) => {
     });
 });
 app.post("/download", (request, response) => {
-  var path = request.body.filepath;
-  downloadFilename = request.body.filename;
-  const filess = `D:\\${path}\\${downloadFilename}`;
+  let path = request.body.filepath;
+  let downloadFilename = request.body.filename;
+  let filess = `D:\\${path}\\${downloadFilename}`;
   response.download(filess);
 });
 app.post("/localdelete", (request, response) => {
-  var path = request.body.filepath;
-  deleteFilename = request.body.filename;
-  const filess = `D:\\${path}\\${deleteFilename}`;
+  let path = request.body.filepath;
+  let deleteFilename = request.body.filename;
+  let filess = `D:\\${path}\\${deleteFilename}`;
   fs.unlinkSync(filess);
   logger.info(`${deleteFilename} deleted`);
 });
 app.post("/localrename", (request, response) => {
-  var oldpath = request.body.oldfilepath;
-  var oldfilename = request.body.oldfilename;
-  var _id = request.body._id;
-  var extension = oldfilename.split(".");
+  oldpath = request.body.oldfilepath;
+  oldfilename = request.body.oldfilename;
+  _id = request.body._id;
+  extension = oldfilename.split(".");
   ext = extension[1];
-  var newpath = request.body.newpath;
-  var oldname = "D:\\" + oldpath + "\\" + oldfilename;
-  var newname = "D:\\" + oldpath + "\\" + newpath + "." + ext;
+  newpath = request.body.newpath;
+  oldname = "D:\\" + oldpath + "\\" + oldfilename;
+  newname = "D:\\" + oldpath + "\\" + newpath + "." + ext;
   fs.rename(oldname, newname, () => {
     logger.info("file renamed successfully");
   });
-  const newfilename = newpath + "." + ext;
-  var newobject = {
+  newfilename = newpath + "." + ext;
+  let newobject = {
     _id: request.body.oldid,
     _rev: request.body.oldrev,
     file_name: newfilename,
@@ -221,36 +221,39 @@ app.post("/localrename", (request, response) => {
       response.send(err, " Document  Failed  to rename");
     });
 });
-app.post("/sendemail", (request, response) => {
-  let otp = otpGenerator.generate(6, {
-    upperCaseAlphabets: false,
-    specialChars: false,
-    lowerCaseAlphabets: false,
-    digits: true,
-  });
+// app.post("/sendemail", (request, response) => {
+//   let otp = otpGenerator.generate(6, {
+//     upperCaseAlphabets: false,
+//     specialChars: false,
+//     lowerCaseAlphabets: false,
+//     digits: true,
+//   });
+//   console.log(otp);
 
-  var sender = nodemail.createTransport({
-    service: "outlook",
-    auth: {
-      user: "filetransify@outlook.com",
-      pass: " file@123",
-    },
-  });
-  var composemail = {
-    from: "filetransify@outlook.com",
-    to: request.body.emailId,
-    subject: `Message`,
-    text: `DO NOT SHARE:\nYour OTP for File Transfer:${otp}`,
-  };
-  sender.sendMail(composemail, function (err, res) {
-    if (err) {
-      console.log("Mail not sent", err);
-    } else {
-      console.log("Mail  sent", res);
-      response.send(otp);
-    }
-  });
-});
+//   var sender = nodemail.createTransport({
+//     host: "smtp.gmail.com",
+//     port: 587,
+//     secure: false,
+//     auth: {
+//       user: "filetransify@gmail.com",
+//       pass: "mtpknobhzxfjrcck",
+//     },
+//   });
+//   var composemail = {
+//     from: "filetransify@gmail.com",
+//     to: request.body.emailId,
+//     subject: `Message`,
+//     text: `DON'T SHARE:\nYour OTP for File Transfer:${otp}`,
+//   };
+//   sender.sendMail(composemail, function (err, res) {
+//     if (err) {
+//       console.log("Mail not sent", err);
+//     } else {
+//       console.log("Mail  sent", res);
+//       response.send(otp);
+//     }
+//   });
+// });
 
 app.listen(port, (err) => {
   if (err) {

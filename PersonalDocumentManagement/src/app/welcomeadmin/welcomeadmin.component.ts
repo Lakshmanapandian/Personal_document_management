@@ -25,7 +25,7 @@ otpForm!:FormGroup;
     );
    
     this.OTP = localStorage.getItem('OTP');
-    console.log(this.OTP);
+     this.OTP = JSON.parse(this.OTP);
   }
   reloadpage(){
     
@@ -36,7 +36,7 @@ otpForm!:FormGroup;
     console.log( this.OTP);
 
      if(this.OTP == otp.otp) {
-      this.api.show();
+      localStorage.removeItem('OTP');
       this.toaster.success("otp is correct");
       this.router.navigate(['/menu/adddocument']);
      }

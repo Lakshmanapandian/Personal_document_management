@@ -1,14 +1,15 @@
 # Personal_document_management
+
 # Description
 
 Personal document management (PDM):
-Personal document management  (PDM) is the used  store your files safely and access them from any device.
+Personal document management (PDM) is the used store your files safely and access them from any device.
 
 # General Information
 
-1.  PDM iis the used  to  store your files safely and access them from any device.
+1.  PDM is the used to store your files safely and access them from any device.
 
-2.  PDM  solution creates a central location to capture and store your organization's document-centric information. This makes finding current versions of documents and information much easier, and allows workers to focus on their roles rather than hunting down pieces of paper
+2.  PDM solution creates a central location to capture and store your organization's document-centric information. This makes finding current versions of documents and information much easier, and allows workers to focus on their roles rather than hunting down pieces of paper
 
 # Project structure
 
@@ -27,22 +28,22 @@ Personal document management  (PDM) is the used  store your files safely and acc
 
 # How to use the project
 
-1.  First you have to login to the PDM  software with your credendials like username and password.
+1.  First you have to login to the PDM software with your credendials like username and password.
 
 2.  My account --> You can see the details of logged in user and here you can edit user profile.
 
 3.  Add user --> you can add the admin user if you want.
 
-4.  Add Files --> Add the files  to local folder and store the file details in database.
+4.  Add Files --> Add the files to local folder and store the file details in database.
 
 5.  Manage Document --> Manage the files like download file,delete file,rename file.
 
 6.  Download --> Download the file using path and filename in database .
 
-7.   delete --> Delete the file using path and filename and store the files in user's folder.
+7.  delete --> Delete the file using path and filename and store the files in user's folder.
 
 8.  Rename-->Rename the file Using path and filename and rename the file in local and update in database
- 
+
 # Install and run it locally
 
 1.  Download or clone the repository to your local machine:

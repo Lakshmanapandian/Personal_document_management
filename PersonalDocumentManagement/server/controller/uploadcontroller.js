@@ -2,9 +2,9 @@ const { async } = require("rxjs");
 const my_db = require("../db");
 const logger = require("../logger/logger");
 const UploadForm = async (object) => {
-  let val;
+  let uploadFormDetails;
   try {
-    val = await my_db
+    uploadFormDetails = await my_db
       .add(object, "document_management")
       .then((data) => {
         logger.info(`${object.file_name} uploaded successfully;`);
@@ -20,9 +20,9 @@ const UploadForm = async (object) => {
   return val;
 };
 const showDocuments = async (object) => {
-  let val;
+  let showDocumentsDetails;
   try {
-    val = await my_db
+    showDocumentsDetails = await my_db
       .getalluser(object, "document_management")
       .then((data) => {
         // logger.info("Your Data was posted sucessfully!!!");
@@ -35,6 +35,6 @@ const showDocuments = async (object) => {
   } catch (error) {
     console.log("OOPS!!!Error");
   }
-  return val;
+  return showDocumentsDetails;
 };
 module.exports = { UploadForm, showDocuments };
