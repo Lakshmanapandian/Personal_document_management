@@ -1,4 +1,3 @@
-// const express = require("express");
 const fs = require("fs");
 const connection = require("express");
 const signupcontroller = require("./controller/signupcontroller");

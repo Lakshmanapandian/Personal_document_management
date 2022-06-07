@@ -7,9 +7,12 @@ import { ApiServiceService } from '../api-service.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  constructor(public api:ApiServiceService) { }
+  constructor(public api:ApiServiceService) { 
+    console.log("Constuctor works");
+  }
 
   ngOnInit(): void {
+    console.log("ngOnInit works");
   }
   isloggedin(){
     return localStorage.getItem('login');

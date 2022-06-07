@@ -8,9 +8,10 @@ import { ApiServiceService } from '../api-service.service';
 })
 export class UsernavComponent implements OnInit {
 
-  constructor(private api:ApiServiceService) { }
+  constructor(private api:ApiServiceService) {  console.log("constructor Runs");}
 
   ngOnInit(): void {
+    console.log("ngOnInit Runs");
   }
   sessiondestoy(){
     localStorage.removeItem('login');

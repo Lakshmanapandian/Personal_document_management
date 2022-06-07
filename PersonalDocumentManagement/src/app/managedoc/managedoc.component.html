@@ -1,9 +1,7 @@
 <link rel="stylesheet"
     href="https://fonts.sandbox.google.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <app-usernav></app-usernav>
-<div class="card mx-auto" style="height: 10vh;
-width: 63vw;
-margin-top: 79px;">
+<div class="card mx-auto">
     <table class="table bg-light" aria-label="filedetails">
         <thead class="text-dark">
             <tr>
@@ -14,24 +12,21 @@ margin-top: 79px;">
 
             </tr>
         </thead>
-        <tbody class="text-dark" *ngFor="let obj of files" style="
-        overflow: scroll;">
+        <tbody class="text-dark" *ngFor="let obj of files">
             <tr>
-                <td scope="row" style="cursor: pointer;height:2vw;;">
-                    <img src="../../images/file.webp" alt="" style="width:6vw;"> <br>
-                    {{obj.file_name}}
+                <td style="cursor: pointer;height:2vw;">
+                    <img src="../../images/file.webp" alt="" class="skeleton"> <br>
+                    <p> {{obj.file_name}}</p>
 
                 </td>
-                <td scope="row" style=" overflow: hidden;"> {{obj.file_type}}</td>
-                <td scope="row" style=" overflow: hidden;"><button class="btn btn-outline-dark px-4 py-2"
-                        (click)="download(obj.filepath,obj.file_name)" style="align-items: center;">Download</button>
+                <td> {{obj.file_type}}</td>
+                <td><button class="btn btn-outline-dark px-4 py-2" (click)="download(obj.filepath,obj.file_name)"
+                        style="align-items: center;">Download</button>
                 </td>
-                <td scope="row" style=" overflow: hidden;"><button class="btn btn-outline-dark px-4 py-2"
-                        (click)="delete(obj._id,obj._rev)"
-                        (click)="localDelete(obj.filepath,obj.file_name)">Delete</button></td>
-                <td scope="row" style=" overflow: hidden;"><button class="btn btn-outline-dark px-4 py-2"
-                        (click)="this.renamediv = true " (click)="this.renamediv= true"
-                        (click)="oldPath(obj)">Rename</button>
+                <td></td>button class="btn btn-outline-dark px-4 py-2" (click)="delete(obj._id,obj._rev)"
+                (click)="localDelete(obj.filepath,obj.file_name)">Delete</button></td>
+                <td><button class="btn btn-outline-dark px-4 py-2" (click)="this.renamediv = true "
+                        (click)="this.renamediv= true" (click)="oldPath(obj)">Rename</button>
                 </td>
             </tr>
         </tbody>

@@ -7,9 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserdashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor() { console.log("constructor works")};
 
   ngOnInit(): void {
+    console.log("ngOnInit works");
   }
 
 }

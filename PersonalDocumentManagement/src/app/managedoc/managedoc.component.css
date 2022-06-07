@@ -40,9 +40,12 @@ a:hover{
 }
 .card.mx-auto{
     height: 10vh;
-    width: 10vw;
+    width: 63vw;
+    margin-top: -17px;
 }
-
+.skeleton{
+    width:6vw;
+}
 
 
  

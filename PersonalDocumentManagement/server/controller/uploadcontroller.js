@@ -17,7 +17,7 @@ const UploadForm = async (object) => {
   } catch (error) {
     console.log("OOPS!!!Error");
   }
-  return val;
+  return uploadFormDetails;
 };
 const showDocuments = async (object) => {
   let showDocumentsDetails;
@@ -25,11 +25,11 @@ const showDocuments = async (object) => {
     showDocumentsDetails = await my_db
       .getalluser(object, "document_management")
       .then((data) => {
-        // logger.info("Your Data was posted sucessfully!!!");
+        logger.info("Your Data was posted sucessfully!!!");
         return data;
       })
       .catch((err) => {
-        // logger.error("error", "Your response from database");
+        logger.error("error", "Your response from database");
         return err;
       });
   } catch (error) {

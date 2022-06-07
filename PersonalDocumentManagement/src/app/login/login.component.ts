@@ -38,7 +38,7 @@ userFormData(formvalue:any){
       localStorage.setItem('username',JSON.stringify(i._id) );
         this.flag = 1;
         this.api.getusername(i._id).subscribe((data:any)=>{
-            
+          console.log(data);
         });
         this.api.getEmail(i.email).subscribe((data:any)=>{
           console.log("OTP");
@@ -49,6 +49,7 @@ userFormData(formvalue:any){
  }
   if(this.flag == 1 ){
     setTimeout(function(){
+      console.log("");
     }, 10000);
     this.router.navigate(['/menu/welcomeadmin']);
   }
