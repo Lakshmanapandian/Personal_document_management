@@ -33,6 +33,10 @@ app.use(
     origin: "http://localhost:4200",
   })
 );
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Headers", "x-authname");
+  next();
+});
 let urlParser = bodyparser.urlencoded({ extended: false });
 app.post("/dashboard", (request, response) => {
   let object = {
@@ -110,50 +114,53 @@ app.post("/username", (request, response) => {
     fs.mkdirSync(path.join(__dirname, "public/Uploads", folderName));
     logger.info(`${folderName} folder created`);
   }
-  app.post("/single", (req, res) => {
-    let store = multer.diskStorage({
-      destination: function (_req, _file, cb) {
-        cb(null, path.join(__dirname, "public/Uploads", folderName));
-      },
-      filename: function (_req, file, cb) {
-        let originalname = file.originalname;
-        let pathtype = file.mimetype;
-        cb(null, originalname, pathtype);
-        logger.info(originalname + " uploaded");
-        let fileDetails = {
-          file_name: originalname,
-          file_type: pathtype,
-          user_id: folderName,
-          filepath: path.join(
-            "Personal_document_management\\PersonalDocumentManagement\\server\\public\\Uploads",
-            `${folderName}`
-          ),
-          type: "files",
-        };
-        uploadcontroller
-          .UploadForm(fileDetails)
-          .then((data) => {
-            logger.info("Uploaded successfully");
-            response.send(data);
-          })
-          .catch((err) => {
-            logger.warn(err);
-          });
-      },
-    });
-    let upload = multer({ storage: store }).single("image");
-
-    upload(req, res, function (err) {
-      if (err) {
-        res.send({ status: 500, error: "Unable to process your request!" });
-      } else {
-        res.send({
-          status: 200,
-          error: "Success!",
-          originalname: originalname,
+});
+app.post("/single", (req, res) => {
+  var originalName;
+  var pathtype;
+  let storefoldername = req.headers["x-authname"];
+  let store = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, path.join(__dirname, "public/Uploads", storefoldername));
+    },
+    filename: function (req, file, cb) {
+      originalName = file.originalname;
+      pathtype = file.mimetype;
+      cb(null, originalName);
+      logger.info(originalName + " uploaded");
+    },
+  });
+  let upload = multer({ storage: store }).single("image");
+  upload(req, res, function (err) {
+    if (err) {
+      res.send({ status: 500, error: "Unable to process your request!" });
+    } else {
+      let fileDetails = {
+        file_name: originalName,
+        file_type: pathtype,
+        user_id: storefoldername,
+        filepath: path.join(
+          "Personal_document_management\\PersonalDocumentManagement\\server\\public\\Uploads",
+          `${storefoldername}`
+        ),
+        type: "files",
+      };
+      console.log(fileDetails);
+      uploadcontroller
+        .UploadForm(fileDetails)
+        .then((data) => {
+          logger.info("Uploaded successfully");
+          response.send(data);
+        })
+        .catch((err) => {
+          logger.warn(err);
         });
-      }
-    });
+      res.send({
+        status: 200,
+        error: "Success!",
+        // originalname: originalname,
+      });
+    }
   });
 });
 app.post("/userfiles", (request, response) => {
@@ -207,6 +214,7 @@ app.post("/localrename", (request, response) => {
     file_type: request.body.oldtype,
     user_id: request.body.olduserid,
     filepath: request.body.oldfilepath,
+    fileDetails: "received",
     type: request.body.type,
   };
   renamecontroller
@@ -220,39 +228,95 @@ app.post("/localrename", (request, response) => {
       response.send(err, " Document  Failed  to rename");
     });
 });
-// app.post("/sendemail", (request, response) => {
-//   let otp = otpGenerator.generate(6, {
-//     upperCaseAlphabets: false,
-//     specialChars: false,
-//     lowerCaseAlphabets: false,
-//     digits: true,
-//   });
-//   console.log(otp);
+app.post("/share", (request, response) => {
+  let receiverFolder = request.body.receiverdetails;
+  console.log(receiverFolder);
+  let store = multer.diskStorage({
+    destination: function (req, _file, cb) {
+      cb(null, path.join(__dirname, "public/Uploads", receiverFolder));
+    },
+    filename: function (req, file, cb) {
+      let originalname = file.originalname;
+      let pathtype = file.mimetype;
+      cb(null, originalname, pathtype);
+      logger.info(originalname + " uploaded");
+      let fileDetails = {
+        file_name: originalname,
+        file_type: pathtype,
+        user_id: receiverFolder,
+        filepath: path.join(
+          "Personal_document_management\\PersonalDocumentManagement\\server\\public\\Uploads",
+          `${receiverFolder}`
+        ),
+        type: "files",
+      };
+      uploadcontroller
+        .UploadForm(fileDetails)
+        .then((data) => {
+          logger.info("Uploaded successfully");
+          response.send(data);
+        })
+        .catch((err) => {
+          logger.warn(err);
+        });
+    },
+  });
+  let uploadfile = multer({ storage: store }).single("image");
 
-//   var sender = nodemail.createTransport({
-//     host: "smtp.gmail.com",
-//     port: 587,
-//     secure: false,
-//     auth: {
-//       user: "filetransify@gmail.com",
-//       pass: "mtpknobhzxfjrcck",
-//     },
-//   });
-//   var composemail = {
-//     from: "filetransify@gmail.com",
-//     to: request.body.emailId,
-//     subject: `Message`,
-//     text: `DON'T SHARE:\nYour OTP for File Transfer:${otp}`,
-//   };
-//   sender.sendMail(composemail, function (err, res) {
-//     if (err) {
-//       console.log("Mail not sent", err);
-//     } else {
-//       console.log("Mail  sent", res);
-//       response.send(otp);
-//     }
-//   });
+  uploadfile((_req, res) => {
+    if (err) {
+      res.send({ status: 500, error: "Unable to process your request!" });
+    } else {
+      res.send({
+        status: 200,
+        error: "Success!",
+      });
+    }
+  });
+});
+// upload(req, res, function (err) {
+//   if (err) {
+//     res.send({ status: 500, error: "Unable to process your request!" });
+//   } else {
+//     res.send({
+//       status: 200,
+//       error: "Success!",
+//     });
+//   }
 // });
+// });
+app.post("/sendemail", (request, response) => {
+  // let otp = otpGenerator.generate(6, {
+  //   upperCaseAlphabets: false,
+  //   specialChars: false,
+  //   lowerCaseAlphabets: false,
+  //   digits: true,
+  // });
+  // console.log(otp);
+  // var sender = nodemail.createTransport({
+  //   host: "smtp.gmail.com",
+  //   port: 587,
+  //   secure: false,
+  //   auth: {
+  //     user: "filetransify@gmail.com",
+  //     pass: "mtpknobhzxfjrcck",
+  //   },
+  // });
+  // var composemail = {
+  //   from: "filetransify@gmail.com",
+  //   to: request.body.emailId,
+  //   subject: `Message`,
+  //   text: `DON'T SHARE:\nYour OTP for File Transfer:${otp}`,
+  // };
+  // sender.sendMail(composemail, function (err, res) {
+  //   if (err) {
+  //     console.log("Mail not sent", err);
+  //   } else {
+  //     console.log("Mail  sent", res);
+  //     response.send(otp);
+  //   }
+  // });
+});
 
 app.listen(port, (err) => {
   if (err) {

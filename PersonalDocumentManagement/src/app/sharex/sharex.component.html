@@ -2,29 +2,34 @@
     href="https://fonts.sandbox.google.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <app-usernav>
 </app-usernav>
-
 <div class="card">
+
     <div class="container">
         <div class="card mx-auto" style="height: 47vh;
         width: 32vw; margin-top:30px; background-color: rgb(201, 195, 195);">
 
+
             <div class="card-body" style="margin-top:10px; ">
-                <form [formGroup]="upload" (ngSubmit)="submit()">
-                    <img src="../../images/logo.png" style="width:10vw;height:14vh;margin-left:10px" alt="">
+
+                <form [formGroup]="sharex" (ngSubmit)="sharefile()">
                     <span class="material-symbols-outlined">
-                        File Upload
+                        FileSend
                     </span>
+                    <div class="form-group">
+                        <label for="file">Receiver :</label>
+                        <input type="text" name="Receiver" class="form-control" placeholder="Enter receiver name"
+                            formControlName="receiver" (change)="checkReceiver($event)">
+                    </div>
                     <div class="form-group">
                         <label for="file">Upload :</label>
                         <input type="file" name="file" class="form-control" placeholder="Upload File"
-                            formControlName="files" id="document" (change)="checkduplicate()">
+                            formControlName="files" id="document">
                     </div>
                     <div style="margin-top: 20px;">
-                        <button type="submit" class="btn btn-outline-dark">Upload </button>
+                        <button type="submit" class="btn btn-outline-dark">Send </button>
                         <button type="button" class="btn btn-outline-dark">Cancel</button>
                     </div>
                 </form>
-                <p style="margin-left:80px;margin-top:20px">{{notify}}</p>
             </div>
         </div>
     </div>

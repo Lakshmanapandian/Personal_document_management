@@ -11,7 +11,7 @@ Personal document management (PDM) is the used store your files safely and acces
 
 2.  PDM solution creates a central location to capture and store your organization's document-centric information. This makes finding current versions of documents and information much easier, and allows workers to focus on their roles rather than hunting down pieces of paper
 
-# Project structure
+# Project Flow
 
     AdminLogin---> -User details
               - Add user

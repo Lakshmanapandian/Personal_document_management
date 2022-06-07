@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -45,13 +45,12 @@ hide:boolean=false;
     console.log(obj);
     return this.http.post('http://localhost:8000/userfiles',obj);
   }
-  uploadFiles(formdata:any,user_id:any){
-    let obj = {
-      userid:user_id,
-      formdata:formdata,
-    }
-    console.log(obj);
-    return this.http.post('http://localhost:8000/single',obj);
+  uploadFiles(formdata:any){
+    let headers = new HttpHeaders();
+    let userId:any =localStorage.getItem("username"); 
+    let parseuserId = JSON.parse(userId);
+headers = headers.append('x-authname', parseuserId);
+    return this.http.post('http://localhost:8000/single',formdata,{"headers":headers});
   }
   download(path:any,filename:any){
     let obj={
@@ -86,6 +85,15 @@ hide:boolean=false;
       emailId :email
     }
     return this.http.post('http://localhost:8000/sendemail',obj)
+  }
+  sharefile(formdata:any,receiver:any){
+
+  let obj={
+      file:formdata,
+      receiverdetails:receiver
+  }
+  console.log(obj);
+    return this.http.post('http://localhost:8000/share',obj)
   }
   show(){
     this.nav=false;

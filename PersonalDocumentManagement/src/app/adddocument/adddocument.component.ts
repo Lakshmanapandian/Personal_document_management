@@ -70,7 +70,7 @@ add = false;
   }
 }
     submit() {
-  console.log(this.user_id);
+  
 
       let inputEl: HTMLInputElement =  this.el.nativeElement.querySelector('#document');
       if(!inputEl || !inputEl.files){
@@ -84,18 +84,16 @@ add = false;
           for (let i = 0; i < fileCount; i++) {
               formData.append('image', inputEl.files[i]);
           }
-             
-           
-              this.http.post('http://localhost:8000/single', formData).subscribe(
-                  data => console.log(data),
-                  error => console.log(error)
-          );
+           this.api.uploadFiles(formData).subscribe((data:any)=>{
+             console.log(data);
+           })
+         
   
       }
       this.toaster.success( "file upload sucessfully");
-      setTimeout(function(){
-        window.location.reload();
-      }, 1000);
+      // setTimeout(function(){
+      //   window.location.reload();
+      // }, 1000);
     }
   addfunction(){
     this.add = !this.add;

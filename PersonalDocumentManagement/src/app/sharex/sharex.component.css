@@ -1,0 +1,29 @@
+.card{
+    position: absolute;
+    top: 10%;
+    left: 29%;
+    width: 67%;
+    height: 80%;
+}
+button{
+    margin-left: 10px;
+}
+a{
+    text-decoration: none;
+    color:white;
+}
+a:hover{
+    color: rgb(114, 114, 216);
+    text-decoration: underline;
+}
+.ul1{
+    background-color: rgb(39, 42, 47) ; 
+    width: 25vw;
+    height: 110vh;
+ }
+ li{
+ display: flex;
+ padding: 40px;
+ color: white;
+ }
+ 

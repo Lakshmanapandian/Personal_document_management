@@ -20,6 +20,7 @@ import { ManagedocComponent } from './managedoc/managedoc.component';
 import { WelcomeadminComponent } from './welcomeadmin/welcomeadmin.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SharexComponent } from './sharex/sharex.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +36,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AdminnavComponent,
     UserdashboardComponent,
     ManagedocComponent,
-    WelcomeadminComponent
+    WelcomeadminComponent,
+    SharexComponent
   ],
   imports: [
     BrowserModule,

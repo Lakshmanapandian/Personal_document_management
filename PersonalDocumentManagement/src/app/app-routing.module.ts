@@ -13,6 +13,7 @@ import { UserdashboardComponent } from './userdashboard/userdashboard.component'
 import { UsernavComponent } from './usernav/usernav.component';
 import { WelcomeadminComponent } from './welcomeadmin/welcomeadmin.component'
 import { AuthGuard } from './shared/authguard.guard';
+import { SharexComponent } from './sharex/sharex.component';
 
 const routes: Routes = [
   {path:"home",redirectTo:'dashboard',pathMatch:'full'},
@@ -25,6 +26,8 @@ const routes: Routes = [
   {path:'userdashboard',component:UserdashboardComponent},
   {path:'managedoc',component:ManagedocComponent},
   {path:'welcomeadmin',component:WelcomeadminComponent},
+  {path:'shareme',component:SharexComponent},
+
   ]
 },
 {path:'login',component:LoginComponent},
