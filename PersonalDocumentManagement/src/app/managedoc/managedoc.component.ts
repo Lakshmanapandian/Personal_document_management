@@ -1,35 +1,22 @@
-import { Component, Input, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { ApiServiceService } from '../api-service.service';
 import{saveAs} from 'file-saver'; 
-import { FormBuilder, FormControl,FormGroup,Validators,NgForm } from '@angular/forms';
+import { FormBuilder,FormGroup,Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-managedoc',
   templateUrl: './managedoc.component.html',
-  // moduleId: module.id,
   styleUrls: ['./managedoc.component.css']
 })
 export class ManagedocComponent implements OnInit {
-  // @Input() username:any;
   user_id:any;
   allfiles:any=[];
 files:any=[]; 
 renamediv = false;
  rename!:FormGroup;
-//  newfilepath= new FormControl(); 
- 
-// filenames:any =[];
   constructor( private api:ApiServiceService,private formbuilder:FormBuilder,private el: ElementRef) { 
-    // console.log(this.username);
   }
-  // iconList = [ // array of icon class list based on type
-  //   { type: "xlsx", icon: "fa fa-file-excel-o" },
-  //   { type: "pdf", icon: "fa fa-file-pdf-o" },
-  //   { type: "jpg", icon: "fa fa-file-image-o" }
-  // ];
-
-
-  ngOnInit(): void {
+ngOnInit(): void {
     let id:any = localStorage.getItem('username');
     console.log(JSON.parse(id))
     let user_id = JSON.parse(id);
@@ -58,12 +45,14 @@ delete(doc_Id:any,doc_rev:any)
 {
   this.api.remove(doc_Id,doc_rev).subscribe(res=>{
     console.log('Your data was Deleted from the database');
+    console.log(res);
     window.alert('sucessfully deleted');
     location.reload();
   })
 }
 localDelete(filepath:any,filename:any){
   this.api.localdelete(filepath,filename).subscribe((data:any)=>{
+    console.log(data);
     console.log('Your data was Deleted from the Local directory');
     window.alert('sucessfully deleted');
   })
