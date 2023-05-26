@@ -39,13 +39,48 @@ a:hover{
     border: 1px solid black;
 }
 .card.mx-auto{
-    height: 10vh;
-    width: 63vw;
+    height: 93vh;
+    width: 68vw;
     margin-top: -17px;
+    display: inline-block;
+   
 }
 .skeleton{
     width:6vw;
 }
 
+.filecss{
+    width: 10vw;
+    position: relative;
+    display: inline-block;
+    border:1px solid black;
+    margin:25px 10px;
+    text-align: center;
+ 
+}
+
+.cs-opacity {
+   display: none;
+   height:115px;
+   width: 10vw; 
+
+}
+.filecss:hover .cs-opacity{
+display: inline-flex;
+    position: absolute;
+    top: 0px;
+    left: 0;
+    opacity: 90%;
+    visibility: visible;
+    background-color: #666666;
+
+}
+.icon{
+    margin-right: 10px;
+    margin-left: 10px;
+    font-weight: 900;
+    cursor: pointer;
+    color:rgb(3, 192, 240);font-size: 25px;display: flex;align-items: center;justify-content: center;height: inherit;
+}
 
  
