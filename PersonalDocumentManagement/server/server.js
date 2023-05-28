@@ -107,7 +107,11 @@ app.get("/getAdminId", (_request, response) => {
     });
 });
 app.post("/username", (request, response) => {
-  let folderName = request.body.username;
+  let folderName = request.body.username; 
+  if (!fs.existsSync(path.join(__dirname, "public"))){
+    fs.mkdirSync(path.join(__dirname, "public"));
+    fs.mkdirSync(path.join(__dirname, "public/Uploads"));
+  }
   if (fs.existsSync(path.join(__dirname, "public/Uploads", folderName))) {
     logger.info("Folder already exist");
   } else {
@@ -285,38 +289,38 @@ app.post("/share", (request, response) => {
 //   }
 // });
 // });
-app.post("/sendemail", (request, response) => {
-  // let otp = otpGenerator.generate(6, {
-  //   upperCaseAlphabets: false,
-  //   specialChars: false,
-  //   lowerCaseAlphabets: false,
-  //   digits: true,
-  // });
-  // console.log(otp);
-  // var sender = nodemail.createTransport({
-  //   host: "smtp.gmail.com",
-  //   port: 587,
-  //   secure: false,
-  //   auth: {
-  //     user: "filetransify@gmail.com",
-  //     pass: "mtpknobhzxfjrcck",
-  //   },
-  // });
-  // var composemail = {
-  //   from: "filetransify@gmail.com",
-  //   to: request.body.emailId,
-  //   subject: `Message`,
-  //   text: `DON'T SHARE:\nYour OTP for File Transfer:${otp}`,
-  // };
-  // sender.sendMail(composemail, function (err, res) {
-  //   if (err) {
-  //     console.log("Mail not sent", err);
-  //   } else {
-  //     console.log("Mail  sent", res);
-  //     response.send(otp);
-  //   }
-  // });
-});
+// app.post("/sendemail", (request, response) => {
+//   let otp = otpGenerator.generate(6, {
+//     upperCaseAlphabets: false,
+//     specialChars: false,
+//     lowerCaseAlphabets: false,
+//     digits: true,
+//   });
+//   console.log(otp);
+//   var sender = nodemail.createTransport({
+//     host: "smtp.gmail.com",
+//     port: 587,
+//     secure: false,
+//     auth: {
+//       user: "filetransify@gmail.com",
+//       pass: "mtpknobhzxfjrcck",
+//     },
+//   });
+//   var composemail = {
+//     from: "filetransify@gmail.com",
+//     to: request.body.emailId,
+//     subject: `Message`,
+//     text: `DON'T SHARE:\nYour OTP for File Transfer:${otp}`,
+//   };
+//   sender.sendMail(composemail, function (err, res) {
+//     if (err) {
+//       console.log("Mail not sent", err);
+//     } else {
+//       console.log("Mail  sent", res);
+//       response.send(otp);
+//     }
+//   });
+// });
 
 app.listen(port, (err) => {
   if (err) {
